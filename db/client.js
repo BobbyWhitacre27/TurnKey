@@ -1,7 +1,7 @@
 // Connect to DB
 const { Client } = require('pg');
 
-const DB_NAME = 'leasing_lad-dev';
+const DB_NAME = 'turnkey-dev';
 
 const DB_URL =
   process.env.DATABASE_URL;

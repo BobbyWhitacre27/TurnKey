@@ -7,9 +7,9 @@ async function dropTables() {
         console.log('Dropping all tables...');
         await client.query(`
         DROP TABLE IF EXISTS users CASCADE;
-        DROP TABLE IF EXISTS posting;
 		DROP TABLE IF EXISTS comments;
 		DROP TABLE IF EXISTS photos;
+		DROP TABLE IF EXISTS posting;
       `);
 
         console.log('finished dropping tables!');
@@ -98,7 +98,7 @@ async function createInitialPosting() {
 
         console.log('resident_cards created:');
         console.log(posting);
-        console.log('Finished creating resident_cards!');
+        console.log('Finished creating posting!');
     } catch (error) { }
 }
 
