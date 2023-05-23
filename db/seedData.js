@@ -37,6 +37,7 @@ async function createTables() {
         price INTEGER NOT NULL,
         description TEXT,
 		type VARCHAR(255) NOT NULL,
+		date DATE NOT NULL,
         "userId" INTEGER REFERENCES users(id)
       );
 
@@ -88,7 +89,8 @@ async function createInitialPosting() {
                 title: 'House for sale',
                 price: 425000,
                 description: "Selling our 3 bedroom 2 bathroom home. Beautiful backyard. New owners will be lucky!",
-                type: "For Sale", 
+                type: "For Sale",
+				date: "2000-01-01",
                 userId: 1
             },
 
@@ -96,7 +98,7 @@ async function createInitialPosting() {
 
         const posting = await Promise.all(postingToCreate.map(createPosting));
 
-        console.log('resident_cards created:');
+        console.log('postings created:');
         console.log(posting);
         console.log('Finished creating posting!');
     } catch (error) { }

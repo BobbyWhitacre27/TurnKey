@@ -48,6 +48,7 @@ apiRouter.post('/', async (req, res, next) => {
 	  price,
 	  description,
 	  type,
+	  date,
 	  userId
         } = req.body;
 
@@ -56,6 +57,7 @@ apiRouter.post('/', async (req, res, next) => {
 			price,
 			description,
 			type,
+			date,
 			userId
         })
 

@@ -1,44 +1,27 @@
 import './App.css';
+import React, { useState } from 'react';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+
+import Header from './components/Header.jsx'
+import Home from './components/Home.jsx'
+import Login from './components/Login.jsx'
+import About from './components/About.jsx'
+import Footer from './components/Footer.jsx'
 
 function App() {
-  return (
-    <div className="App">
-   
-
-        <section class="overflow-hidden bg-gray-50 sm:grid sm:grid-cols-2">
-          <div class="p-8 md:p-12 lg:px-16 lg:py-24">
-            <div class="mx-auto max-w-xl text-center sm:text-left">
-              <h2 class="text-2xl font-bold text-gray-900 md:text-3xl">
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit
-              </h2>
-
-              <p class="hidden text-gray-500 md:mt-4 md:block">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Et, egestas
-                tempus tellus etiam sed. Quam a scelerisque amet ullamcorper eu enim et
-                fermentum, augue. Aliquet amet volutpat quisque ut interdum tincidunt
-                duis.
-              </p>
-
-              <div class="mt-4 md:mt-8">
-                <a
-                  href="#"
-                  class="inline-block rounded bg-emerald-600 px-12 py-3 text-sm font-medium text-white transition hover:bg-emerald-700 focus:outline-none focus:ring focus:ring-yellow-400"
-                >
-                  Get Started Today
-                </a>
-              </div>
-            </div>
-          </div>
-
-          <img
-            alt="Student"
-            src="https://images.unsplash.com/photo-1464582883107-8adf2dca8a9f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
-            class="h-56 w-full object-cover sm:h-full"
-          />
-        </section>
-
-    </div>
-  );
+	return (
+		<div className="App">
+			<BrowserRouter>
+				<Header />
+				<Routes>
+					<Route exact path="/" element={<Home />} />
+					<Route path="/Login" element={<Login />} />
+					<Route path="/About" element={<About />} />
+				</Routes>
+				<Footer />
+			</BrowserRouter>
+		</div>
+	);
 }
 
 export default App;

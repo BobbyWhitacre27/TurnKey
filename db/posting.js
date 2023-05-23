@@ -5,6 +5,7 @@ async function createPosting({
     price,
     description,
     type,
+	date,
     userId
 }) {
     
@@ -12,11 +13,11 @@ async function createPosting({
         rows: [posting],
     } = await client.query(
         `
-    INSERT INTO posting (title, price, description, type, "userId") 
-    VALUES($1, $2, $3, $4, $5) 
+    INSERT INTO posting (title, price, description, type, date, "userId") 
+    VALUES($1, $2, $3, $4, $5, $6) 
     RETURNING *;
     `,
-        [title, price, description, type, userId]
+        [title, price, description, type, date, userId]
     );
 
     return posting;
