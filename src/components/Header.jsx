@@ -88,10 +88,11 @@ const Header = () => {
 						aria-label="Site Nav"
 						class="hidden items-center justify-center gap-8 text-sm font-medium lg:flex lg:w-0 lg:flex-1"
 					>
-						<a class="text-gray-900" href="">About</a>
-						<a class="text-gray-900" href="">Rent</a>
-						<a class="text-gray-900" href="">Buy</a>
-						{/* <a class="text-gray-900" href="">Add a Posting</a> */}
+						<Link to="/" class="text-gray-900">Home</Link>
+						<Link to="/Rent" class="text-gray-900">Rent</Link>
+						<Link to="/Buy" class="text-gray-900" href="">Buy</Link>
+						<Link to="/Post" class="text-gray-900">Post</Link>
+						<Link to="/Profile" class="text-gray-900">Profile</Link>
 					</nav>
 
 					<div class="hidden items-center gap-4 lg:flex">
@@ -115,9 +116,10 @@ const Header = () => {
 					<nav
 						class="flex items-center justify-center overflow-x-auto p-4 text-sm font-medium"
 					>
-						<a class="shrink-0 px-4 text-gray-900" href="">About</a>
-						<a class="shrink-0 px-4 text-gray-900" href="">Rent</a>
-						<a class="shrink-0 px-4 text-gray-900" href="">Buy</a>
+						<Link to="/About" class="shrink-0 px-4 text-gray-900">About</Link>
+						<Link to="/Rent" class="shrink-0 px-4 text-gray-900">Rent</Link>
+						<Link to="/Buy" class="shrink-0 px-4 text-gray-900">Buy</Link>
+						<Link to="/Post" class="shrink-0 px-4 text-gray-900">Post</Link>
 					</nav>
 				</div>
 			</header>

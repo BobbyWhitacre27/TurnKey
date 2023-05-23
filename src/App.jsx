@@ -7,6 +7,7 @@ import Home from './components/Home.jsx'
 import Login from './components/Login.jsx'
 import About from './components/About.jsx'
 import Footer from './components/Footer.jsx'
+import Signup from './components/Signup.jsx'
 
 function App() {
 	return (
@@ -17,6 +18,7 @@ function App() {
 					<Route exact path="/" element={<Home />} />
 					<Route path="/Login" element={<Login />} />
 					<Route path="/About" element={<About />} />
+					<Route path="/Signup" element={<Signup />} />
 				</Routes>
 				<Footer />
 			</BrowserRouter>
