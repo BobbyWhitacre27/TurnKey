@@ -10,7 +10,7 @@ const Header = () => {
 				<div
 					class="mx-auto flex h-16 max-w-screen-xl items-center justify-between px-4"
 				>
-					<div class="flex w-0 flex-1 lg:hidden">
+					<Link to="/Profile" class="flex w-0 flex-1 lg:hidden">
 						<button class="rounded-full bg-gray-100 p-2 text-gray-600" type="button">
 							<span class="sr-only">Account</span>
 							<svg
@@ -29,7 +29,7 @@ const Header = () => {
 								></path>
 							</svg>
 						</button>
-					</div>
+					</Link>
 
 					<div class="flex items-center gap-4">
 						<a href="#">
@@ -92,10 +92,10 @@ const Header = () => {
 					<nav
 						class="flex items-center justify-center overflow-x-auto p-4 text-sm font-medium"
 					>
-						<Link to="/Home" class="shrink-0 px-4 text-gray-900">Home</Link>
+						<Link to="/" class="shrink-0 px-4 text-gray-900">Home</Link>
 						<Link to="/Rent" class="shrink-0 px-4 text-gray-900">Rent</Link>
 						<Link to="/Buy" class="shrink-0 px-4 text-gray-900">Buy</Link>
-						<Link to="/Post" class="shrink-0 px-4 text-gray-900">Post</Link>
+						{/* <Link to="/Post" class="shrink-0 px-4 text-gray-900">Post</Link> */}
 					</nav>
 				</div>
 			</header>
