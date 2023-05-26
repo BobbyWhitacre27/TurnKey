@@ -37,7 +37,7 @@ const Home = () => {
 
 			<div class="sm:grid grid-cols-3 gap-4 p-4 mb-8 bg-gray-100">
 
-				<div class="block group p-4 hidden sm:visible sm:mt-24 content-center">
+				<div class="block group p-4  sm:mt-24 content-center">
 					<h1 class=" font-bold text-4xl italic">View some of the latest postings</h1>
 					<p></p>
 					</div>
