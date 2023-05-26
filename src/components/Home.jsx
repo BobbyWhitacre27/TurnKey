@@ -18,7 +18,7 @@ const Home = () => {
 
 							<div class="flex justify-center gap-4">
 								<Link
-								to="/Buy"
+									to="/Buy"
 									class="inline-block px-5 py-3 mt-3 font-bold tracking-wide uppercase bg-white rounded-2xl hover:text-black"
 								>
 									Buy
@@ -374,52 +374,57 @@ const Home = () => {
 
 
 
-			<section>
-  <div class="max-w-screen-xl px-4 mx-auto  sm:px-6 lg:px-8">
-    <div class="grid grid-cols-1 gap-4 lg:grid-cols-3 lg:items-stretch">
-  
+			<section class="bg-gray-50">
+				<div class="p-8 md:p-12 lg:px-16 lg:py-24">
+					<div class="mx-auto max-w-lg text-center">
+						<h2 class="text-2xl font-bold text-gray-900 md:text-3xl"> 
+							Want to receive TurnKey Updates?
+						</h2>
 
-      <div class="lg:col-span-2 lg:py-8">
-        <ul class="grid grid-cols-2 gap-4">
-          <li>
-      
-              <img
-                src="https://images.pexels.com/photos/7788609/pexels-photo-7788609.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-                alt=""
-                class="object-cover w-full rounded-2xl aspect-square"
-              />
-            
-          </li>
+						<p class="hidden text-gray-500 sm:mt-4 sm:block">
+							Stay informed on latest postings and join our e-blast alerts!
+						</p>
+					</div>
 
-          <li>
-         
-              <img
-                src="https://images.pexels.com/photos/6579051/pexels-photo-6579051.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-                alt=""
-                class="object-cover w-full rounded-2xl aspect-square"
-              />
+					<div class="mx-auto mt-8 max-w-xl">
+						<form action="#" class="sm:flex sm:gap-4">
+							<div class="sm:flex-1">
+								<label for="email" class="sr-only">Email</label>
 
-           
-           
-          </li>
-        </ul>
-      </div>
-	  <div class="grid p-6 bg-gray-100 rounded place-content-center sm:p-8">
-        <div class="max-w-md mx-auto text-center lg:text-left">
-          <header>
-            <img src="https://i.ibb.co/KL6qQD4/Turn-Key-Logo-2.png"></img>
+								<input
+									type="email"
+									placeholder="Email address"
+									class="w-full rounded-md border-gray-200 bg-white p-3 text-gray-700 shadow-sm transition focus:border-white focus:outline-none focus:ring focus:ring-yellow-400"
+								/>
+							</div>
 
-            <p class="mt-4 text-gray-500">
-              Begin your journey and fing your new home today.
-            </p>
-          </header>
+							<button
+								type="submit"
+								class="group flex w-full items-center justify-center gap-2 rounded-md bg-blue-600 px-5 py-3 text-white transition focus:outline-none focus:ring focus:ring-yellow-400 sm:mt-0 sm:w-auto"
+							>
+								<span class="text-sm font-medium"> Sign Up </span>
 
-   
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+								<svg
+									class="h-5 w-5 rtl:rotate-180"
+									xmlns="http://www.w3.org/2000/svg"
+									fill="none"
+									viewBox="0 0 24 24"
+									stroke="currentColor"
+								>
+									<path
+										stroke-linecap="round"
+										stroke-linejoin="round"
+										stroke-width="2"
+										d="M17 8l4 4m0 0l-4 4m4-4H3"
+									/>
+								</svg>
+							</button>
+						</form>
+					</div>
+				</div>
+			</section>
+
+
 
 
 
