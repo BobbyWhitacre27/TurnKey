@@ -72,19 +72,19 @@ const Header = () => {
 					</nav>
 
 					<div class="hidden items-center gap-4 lg:flex">
-						<a
-							href="#"
-							class="rounded-lg bg-gray-100 px-5 py-2 text-sm font-medium text-gray-600"
+						<Link
+							to="/Login"
+							class="rounded-lg bg-gray-100 px-5 py-2 text-sm font-medium text-gray-600 hover:text-black"
 						>
 							Log in
-						</a>
+						</Link>
 
-						<a
-							href="#"
+						<Link
+							to="/Signup"
 							class="rounded-lg bg-black px-5 py-2 text-sm font-medium text-white"
 						>
 							Sign up
-						</a>
+						</Link>
 					</div>
 				</div>
 
@@ -95,7 +95,7 @@ const Header = () => {
 						<Link to="/" class="shrink-0 px-4 text-gray-900">Home</Link>
 						<Link to="/Rent" class="shrink-0 px-4 text-gray-900">Rent</Link>
 						<Link to="/Buy" class="shrink-0 px-4 text-gray-900">Buy</Link>
-						{/* <Link to="/Post" class="shrink-0 px-4 text-gray-900">Post</Link> */}
+						<Link to="/Post" class="shrink-0 px-4 text-gray-900">Post</Link>
 					</nav>
 				</div>
 			</header>

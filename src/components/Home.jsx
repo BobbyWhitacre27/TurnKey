@@ -8,7 +8,7 @@ const Home = () => {
 
 
 			<section
-				class="overflow-hidden bg-[url(https://images.pexels.com/photos/259588/pexels-photo-259588.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2)] bg-cover bg-center bg-no-repeat"
+				class="overflow-hidden bg-[url(https://images.pexels.com/photos/5997996/pexels-photo-5997996.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2)] bg-cover bg-center bg-no-repeat"
 			>
 				<div class="bg-black/25 p-8 md:p-12 lg:px-16 lg:py-24">
 					<div class="text-center ltr:sm:text-left rtl:sm:text-right">
