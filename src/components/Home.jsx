@@ -47,11 +47,11 @@ const Home = () => {
 					/>
 
 					<div class="p-4">
-						<a href="#">
+						<Link to="/Buy">
 							<h3 class="text-lg font-medium text-gray-900">
 								Buy a home
 							</h3>
-						</a>
+						</Link>
 
 						<p class="mt-2 line-clamp-3 text-sm/relaxed text-gray-500">
 							Ready to buy? Shop home postings for sale and get in direct contact with the owner. No hassles! Drop a comment on the posting you like to contact the owner.
@@ -70,11 +70,11 @@ const Home = () => {
 					/>
 
 					<div class="p-4">
-						<a href="#">
+						<Link to="/Rent">
 							<h3 class="text-lg font-medium text-gray-900">
 								Rent a home
 							</h3>
-						</a>
+						</Link>
 
 						<p class="mt-2 line-clamp-3 text-sm/relaxed text-gray-500">
 							Looking for your next lease? Look no further! Browse from many rental options available to you. See what is available and if you find something you like reach out!
@@ -93,11 +93,11 @@ const Home = () => {
 					/>
 
 					<div class="p-4">
-						<a href="#">
+						<Link to="/">
 							<h3 class="text-lg font-medium text-gray-900">
 								Create a posting
 							</h3>
-						</a>
+						</Link>
 
 						<p class="mt-2 line-clamp-3 text-sm/relaxed text-gray-500">
 							Have a property you are interested in selling or renting? You came to the right place! You can easily create an account and add your listing to our site.
@@ -370,6 +370,56 @@ const Home = () => {
 				</div>
 			</section>
 
+
+
+
+
+			<section>
+  <div class="max-w-screen-xl px-4 mx-auto  sm:px-6 lg:px-8">
+    <div class="grid grid-cols-1 gap-4 lg:grid-cols-3 lg:items-stretch">
+  
+
+      <div class="lg:col-span-2 lg:py-8">
+        <ul class="grid grid-cols-2 gap-4">
+          <li>
+      
+              <img
+                src="https://images.pexels.com/photos/7788609/pexels-photo-7788609.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+                alt=""
+                class="object-cover w-full rounded-2xl aspect-square"
+              />
+            
+          </li>
+
+          <li>
+         
+              <img
+                src="https://images.pexels.com/photos/6579051/pexels-photo-6579051.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+                alt=""
+                class="object-cover w-full rounded-2xl aspect-square"
+              />
+
+           
+           
+          </li>
+        </ul>
+      </div>
+	  <div class="grid p-6 bg-gray-100 rounded place-content-center sm:p-8">
+        <div class="max-w-md mx-auto text-center lg:text-left">
+          <header>
+            <img src="https://i.ibb.co/KL6qQD4/Turn-Key-Logo-2.png"></img>
+
+            <p class="mt-4 text-gray-500">
+              Begin your journey and fing your new home today.
+            </p>
+          </header>
+
+   
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
 
 
