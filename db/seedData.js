@@ -86,10 +86,10 @@ async function createInitialPosting() {
         console.log('Starting to create posting...');
         const postingToCreate = [
             {
-                title: 'House for sale',
+                title: "House for sale",
                 price: 425000,
                 description: "Selling our 3 bedroom 2 bathroom home. Beautiful backyard. New owners will be lucky!",
-                type: "For Sale",
+                type: "buy",
 				date: "2000-01-01",
                 userId: 1
             },

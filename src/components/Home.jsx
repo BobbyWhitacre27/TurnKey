@@ -1,3 +1,4 @@
+import { isLabelWithInternallyDisabledControl } from "@testing-library/user-event/dist/utils";
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -399,8 +400,8 @@ const Home = () => {
 							</div>
 
 							<button
-								type="submit"
-								class="group flex w-full items-center justify-center gap-2 rounded-md bg-blue-600 px-5 py-3 text-white transition focus:outline-none focus:ring focus:ring-yellow-400 sm:mt-0 sm:w-auto"
+								onClick={() => window.alert("Thank you for signing up for our e-blasts!")}
+								class="group flex w-full items-center justify-center gap-2 rounded-md bg-blue-600 px-5 py-3  text-white transition focus:outline-none focus:ring sm:mt-0 sm:w-auto"
 							>
 								<span class="text-sm font-medium"> Sign Up </span>
 

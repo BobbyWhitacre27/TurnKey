@@ -31,6 +31,19 @@ async function getAllPostings() {
     return posting;
 }
 
+async function getPostingsByType(type) {
+    const {
+        rows: [posting],
+    } = await client.query(
+        `
+    SELECT * FROM posting
+    WHERE type=$1;
+  `, [type]);
+
+  return posting;
+}
+
+
 async function getPostingByUserId(id) {
     const {
         rows: [posting],
@@ -142,5 +155,6 @@ module.exports = {
 	updatePostingPrice,
 	updatePostingDescription,
 	updatePostingType,
-	deletePosting
+	deletePosting,
+	getPostingsByType
 };

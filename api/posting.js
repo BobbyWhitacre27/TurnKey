@@ -9,7 +9,8 @@ const {
 	updatePostingPrice,
 	updatePostingDescription,
 	updatePostingType,
-	deletePosting
+	deletePosting,
+	getPostingsByType
 } = require('../db/posting');
 
 
@@ -26,8 +27,9 @@ apiRouter.get('/', async (req, res, next) => {
     }
 });
 
-apiRouter.get('/:userId', async (req, res, next) => {
+apiRouter.get('user/:userId', async (req, res, next) => {
     try {
+
         const id = req.params.userId;
         const postings = await getPostingByUserId(id)
 
@@ -39,8 +41,22 @@ apiRouter.get('/:userId', async (req, res, next) => {
     }
 });
 
+apiRouter.get('/:type', async (req, res, next) => {
+    try {
+        const type = req.params.type;
+        const postings = await getPostingsByType(type)
 
-// Add new card
+        res.send(
+            postings
+        )
+    } catch (error) {
+        next(error)
+    }
+});
+
+
+
+// Add new post
 apiRouter.post('/', async (req, res, next) => {
     try {
         const {

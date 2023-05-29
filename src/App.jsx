@@ -14,6 +14,9 @@ import Post from './components/Post.jsx'
 import Buy from './components/Buy.jsx'
 
 function App() {
+	const [posting, setPosting] = useState([])
+
+
 	return (
 		<div className="App">
 			<BrowserRouter>
@@ -23,10 +26,10 @@ function App() {
 					<Route path="/Login" element={<Login />} />
 					<Route path="/About" element={<About />} />
 					<Route path="/Signup" element={<Signup />} />
-					<Route path="/Rent" element={<Rent />} />
-					<Route path="/Profile" element={<Profile />} />
+					<Route path="/Rent" element={<Rent posting={posting} setPosting={setPosting} />} />
+					<Route path="/Profile" element={<Profile posting={posting} setPosting={setPosting} />} />
 					<Route path="/Post" element={<Post />} />
-					<Route path="/Buy" element={<Buy />} />
+					<Route path="/Buy" element={<Buy posting={posting} setPosting={setPosting} />} />
 				</Routes>
 				<Footer />
 			</BrowserRouter>

@@ -32,11 +32,11 @@ const Header = () => {
 					</Link>
 
 					<div class="flex items-center gap-4">
-						<a href="#">
+						<Link to="/">
 							<span class="sr-only">Logo</span>
 							<img src="https://i.ibb.co/KL6qQD4/Turn-Key-Logo-2.png" class="h-12"></img>
 							<span class="h-10 w-20 rounded-lg bg-gray-200"></span>
-						</a>
+						</Link>
 
 						
 					</div>
