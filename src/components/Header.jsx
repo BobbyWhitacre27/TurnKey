@@ -1,7 +1,17 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-const Header = () => {
+const Header = ({ user, setUser, setToken, token }) => {
+	const navigate = useNavigate();
+
+
+	const logout = () => {
+        localStorage.removeItem('token');
+        setToken('');
+        setUser('');
+        navigate('/');
+    }
+
 	return (
 		<header>
 
@@ -67,12 +77,12 @@ const Header = () => {
 						<Link to="/" class="text-gray-900">Home</Link>
 						<Link to="/Buy" class="text-gray-900" href="">Buy</Link>
 						<Link to="/Rent" class="text-gray-900">Rent</Link>
-						<Link to="/Post" class="text-gray-900">Post</Link>
-						<Link to="/Profile" class="text-gray-900">Profile</Link>
+						{token === "" ? "" : <div><Link to="/Post" class="text-gray-900">Post</Link></div>}
+						{token === "" ? "" : <div><Link to="/Profile" class="text-gray-900">Profile</Link></div>}
 					</nav>
 
-					<div class="hidden items-center gap-4 lg:flex">
-						<Link
+					
+						{token === "" ? <div class="hidden items-center gap-4 lg:flex"><Link
 							to="/Login"
 							class="rounded-lg bg-gray-100 px-5 py-2 text-sm font-medium text-gray-600 hover:text-black"
 						>
@@ -84,8 +94,16 @@ const Header = () => {
 							class="rounded-lg bg-black px-5 py-2 text-sm font-medium text-white"
 						>
 							Sign up
-						</Link>
-					</div>
+						</Link></div>
+						:
+						<div class="hidden items-center gap-4 lg:flex"><Link
+							to="/"
+							onClick={logout}
+							class="rounded-lg bg-black px-5 py-2 text-sm font-medium text-white"
+						>
+							Logout
+						</Link></div>}
+					
 				</div>
 
 				<div class="border-t border-gray-100 lg:hidden">

@@ -2,6 +2,10 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 const Post = () => {
+	const navigate = useNavigate();
+
+
+
 	return (
 		<section>
 
@@ -24,45 +28,38 @@ const Post = () => {
 
 
 			<section class="">
-				<div class="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
+				<div class="mx-auto max-w-screen-xl px-4 py-12 sm:px-6 lg:px-8">
 					
 				
 
 						<div class="rounded-lg bg-white p-8 shadow-lg sm:w-1/2 m-auto lg:col-span-3 lg:p-12">
+							<h1 class="mb-8 text-3xl font-bold">Add A New Posting</h1>
 							<form action="" class="space-y-4">
 								<div>
 									<label class="sr-only" for="name">Name</label>
 									<input
-										class="w-full rounded-lg border-gray-200 p-3 text-sm"
-										placeholder="Name"
+										class="w-full rounded-lg border-gray-200 border p-3 text-sm"
+										placeholder="Title"
 										type="text"
 										id="name"
 									/>
 								</div>
 
-								<div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+								<div class="grid grid-cols-1 gap-4 sm:grid-cols-1">
 									<div>
-										<label class="sr-only" for="email">Email</label>
+										<label class="sr-only" for="email">Price</label>
 										<input
-											class="w-full rounded-lg border-gray-200 p-3 text-sm"
-											placeholder="Email address"
+											class="w-full rounded-lg border-gray-200 border p-3 text-sm"
+											placeholder="Price"
 											type="email"
 											id="email"
 										/>
 									</div>
 
-									<div>
-										<label class="sr-only" for="phone">Phone</label>
-										<input
-											class="w-full rounded-lg border-gray-200 p-3 text-sm"
-											placeholder="Phone Number"
-											type="tel"
-											id="phone"
-										/>
-									</div>
+					
 								</div>
 
-								<div class="grid grid-cols-1 gap-4 text-center sm:grid-cols-3">
+								<div class="grid grid-cols-1 gap-4 text-center sm:grid-cols-2">
 									<div>
 										<input
 											class="peer sr-only"
@@ -77,7 +74,7 @@ const Post = () => {
 											class="block w-full rounded-lg border border-gray-200 p-3 hover:border-black peer-checked:border-black peer-checked:bg-black peer-checked:text-white"
 											tabindex="0"
 										>
-											<span class="text-sm font-medium"> Option 1 </span>
+											<span class="text-sm font-medium"> For Sale </span>
 										</label>
 									</div>
 
@@ -95,35 +92,19 @@ const Post = () => {
 											class="block w-full rounded-lg border border-gray-200 p-3 hover:border-black peer-checked:border-black peer-checked:bg-black peer-checked:text-white"
 											tabindex="0"
 										>
-											<span class="text-sm font-medium"> Option 2 </span>
+											<span class="text-sm font-medium"> For Rent </span>
 										</label>
 									</div>
 
-									<div>
-										<input
-											class="peer sr-only"
-											id="option3"
-											type="radio"
-											tabindex="-1"
-											name="option"
-										/>
-
-										<label
-											for="option3"
-											class="block w-full rounded-lg border border-gray-200 p-3 hover:border-black peer-checked:border-black peer-checked:bg-black peer-checked:text-white"
-											tabindex="0"
-										>
-											<span class="text-sm font-medium"> Option 3 </span>
-										</label>
-									</div>
+						
 								</div>
 
 								<div>
 									<label class="sr-only" for="message">Message</label>
 
 									<textarea
-										class="w-full rounded-lg border-gray-200 p-3 text-sm"
-										placeholder="Message"
+										class="w-full rounded-lg border-gray-200 border p-3 text-sm"
+										placeholder="Description - Include contact method, location, and listing details."
 										rows="8"
 										id="message"
 									></textarea>
@@ -131,10 +112,10 @@ const Post = () => {
 
 								<div class="mt-4">
 									<button
-										type="submit"
+										onClick={()=>navigate("/Post_photos")}
 										class="inline-block w-full rounded-lg bg-black px-5 py-3 font-medium text-white sm:w-auto"
 									>
-										Next
+										Add Posting
 									</button>
 								</div>
 							</form>

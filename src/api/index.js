@@ -1,5 +1,38 @@
 export const APIURL = `http://localhost:4000/api`;
 
+export const register = async (username, password) => {
+
+    const res = await fetch(`${APIURL}/users/register`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            username: `${username}`,
+            password: `${password}`,
+			isAdmin: false
+        }),
+    });
+    const json = await res.json();
+
+    return json;
+};
+
+export const login = async (username, password) => {
+    const res = await fetch(`${APIURL}/users/login`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            username: `${username}`,
+            password: `${password}`,
+        }),
+    });
+    const json = await res.json();
+    return json;
+};
+
 export async function getAllPostings() {
 
     try {

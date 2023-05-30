@@ -1,7 +1,22 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { getPostingsByType, getAllPostings } from "../api";
 
-const Rent = () => {
+const Rent = ({ posting, setPosting}) => {
+
+	const postings = async () => {
+		const type = 'rent'
+        const postings = await getPostingsByType(type);
+        setPosting(postings)
+    }
+
+	useEffect(() => {
+        postings()
+    }, [])
+
+	console.log({posting})
+
+
 	return (
 		<section>
 

@@ -12,23 +12,27 @@ import Rent from './components/Rent.jsx'
 import Profile from './components/Profile.jsx'
 import Post from './components/Post.jsx'
 import Buy from './components/Buy.jsx'
+import Post_photos from './components/Post_photos.jsx'
 
 function App() {
+	const [token, setToken] = useState("");
+	const [user, setUser] = useState([]);
 	const [posting, setPosting] = useState([])
 
 
 	return (
 		<div className="App">
 			<BrowserRouter>
-				<Header />
+				<Header token={token} user={user} setUser={setUser} setToken={setToken} />
 				<Routes>
 					<Route exact path="/" element={<Home />} />
-					<Route path="/Login" element={<Login />} />
+					<Route path="/Login" element={<Login setToken={setToken} setUser={setUser} />} />
 					<Route path="/About" element={<About />} />
-					<Route path="/Signup" element={<Signup />} />
+					<Route path="/Signup" element={<Signup setToken={setToken} setUser={setUser} />} />
 					<Route path="/Rent" element={<Rent posting={posting} setPosting={setPosting} />} />
 					<Route path="/Profile" element={<Profile posting={posting} setPosting={setPosting} />} />
 					<Route path="/Post" element={<Post />} />
+					<Route path="/Post_photos" element={<Post_photos />} />
 					<Route path="/Buy" element={<Buy posting={posting} setPosting={setPosting} />} />
 				</Routes>
 				<Footer />

@@ -1,7 +1,43 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { register, login } from "../api/index.js"
 
-const Signup = () => {
+const Signup = ({setUser, setToken}) => {
+	const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+    const [message, setMessage] = useState('');
+    const navigate = useNavigate();
+
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+
+        try {
+
+          const signUp = await register(username, password);
+          if (signUp.error) {
+            setMessage(signUp.message);
+            return;
+            }
+          if (signUp) {
+            const logIn = await login(username, password);
+            if (logIn.error) {
+                setMessage(logIn.message);
+            } else {
+                setToken(logIn.token);
+                setUser(logIn.user);
+				setMessage(signUp.message);
+                localStorage.setItem('token', JSON.stringify(logIn.token));
+                navigate('/Profile');
+            }
+            }
+        } catch (error) {
+            console.error("error in handleSubmit of Register.js");
+        }
+    };
+
+    const registerMessage = message !== "" ? <p class="mt-4 text-gray-500">{message}</p> : ""
+
+
     return (
         <section>
 	
@@ -14,15 +50,17 @@ const Signup = () => {
 						<p class="mt-4 text-gray-500">
 							Please create a username and password below to set up your account!
 						</p>
+						{registerMessage}
 					</div>
 
-					<form action="" class="mx-auto mb-0 mt-8 max-w-md space-y-4">
+					<form action="" class="mx-auto mb-0 mt-8 max-w-md space-y-4" onSubmit={handleSubmit}>
 						<div>
-							<label for="email" class="sr-only">Email</label>
+							<label for="email" class="sr-only">Username</label>
 
 							<div class="relative">
 								<input
-									type="email"
+									type="username"
+									onChange={(e) => setUsername(e.target.value)}
 									class="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
 									placeholder="Enter username"
 								/>
@@ -37,6 +75,7 @@ const Signup = () => {
 							<div class="relative">
 								<input
 									type="password"
+									onChange={(e) => setPassword(e.target.value)}
 									class="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
 									placeholder="Enter password"
 								/>
@@ -64,7 +103,7 @@ const Signup = () => {
 				<div class="relative h-64 w-full sm:h-96 lg:h-full lg:w-1/2">
 					<img
 						alt="Welcome"
-						src="https://images.pexels.com/photos/1022936/pexels-photo-1022936.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+						src="https://images.pexels.com/photos/6579046/pexels-photo-6579046.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
 						class="absolute inset-0 h-full w-full object-cover"
 					/>
 				</div>

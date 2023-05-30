@@ -17,11 +17,11 @@ require('dotenv').config();
 apiRouter.post('/register', async (req, res, next) => {
   try {
     const { username, password, isAdmin } = req.body;
-    if (password.length < 6) {
+    if (password.length < 3) {
       res.send({
         error: 'PasswordInvalid',
         name: 'PasswordTooShort',
-        message: 'Password Too Short! Must be at least 6 characters.',
+        message: 'Password Too Short! Must be at least 3 characters.',
       });
     }
     const checkUser = await getUserbyUsername(username);
