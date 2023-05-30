@@ -54,3 +54,28 @@ export async function getPostingsByType(type) {
         console.error(err);
     }
 }
+
+export async function createPosting(
+	userId, title, price, type, date, description
+) {
+    try {
+        const res = await fetch(`${APIURL}/posting`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+				userId: userId, 
+				title: title,
+				price: price,
+				type: type,
+				date: date,
+				description: description
+            }),
+        });
+        const json = res.json();
+        return json;
+    } catch (err) {
+        console.error(err);
+    }
+}

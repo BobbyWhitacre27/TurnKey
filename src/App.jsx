@@ -31,7 +31,7 @@ function App() {
 					<Route path="/Signup" element={<Signup setToken={setToken} setUser={setUser} />} />
 					<Route path="/Rent" element={<Rent posting={posting} setPosting={setPosting} />} />
 					<Route path="/Profile" element={<Profile posting={posting} setPosting={setPosting} />} />
-					<Route path="/Post" element={<Post />} />
+					<Route path="/Post" element={<Post user={user} />} />
 					<Route path="/Post_photos" element={<Post_photos />} />
 					<Route path="/Buy" element={<Buy posting={posting} setPosting={setPosting} />} />
 				</Routes>

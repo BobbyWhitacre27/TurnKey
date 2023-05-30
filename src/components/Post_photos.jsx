@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 const Post_photos = () => {
+	const navigate = useNavigate();
+	const [imageURL, setImageURL] = useState('');
+	
 	return (
 		<section>
 
@@ -69,6 +72,7 @@ const Post_photos = () => {
 								<div class="mt-4">
 									<button
 										type="submit"
+										onClick={() => navigate("/Profile")}
 										class="inline-block w-full rounded-lg bg-black px-5 py-3 font-medium text-white sm:w-auto"
 									>
 										Complete Posting

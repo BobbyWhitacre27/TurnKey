@@ -79,6 +79,7 @@ const Header = ({ user, setUser, setToken, token }) => {
 						<Link to="/Rent" class="text-gray-900">Rent</Link>
 						{token === "" ? "" : <div><Link to="/Post" class="text-gray-900">Post</Link></div>}
 						{token === "" ? "" : <div><Link to="/Profile" class="text-gray-900">Profile</Link></div>}
+
 					</nav>
 
 					

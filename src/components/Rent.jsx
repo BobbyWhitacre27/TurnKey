@@ -4,17 +4,17 @@ import { getPostingsByType, getAllPostings } from "../api";
 
 const Rent = ({ posting, setPosting}) => {
 
-	const postings = async () => {
-		const type = 'rent'
-        const postings = await getPostingsByType(type);
-        setPosting(postings)
-    }
+	// const postings = async () => {
+	// 	const type = 'rent'
+    //     const postings = await getPostingsByType(type);
+    //     setPosting(postings)
+    // }
 
-	useEffect(() => {
-        postings()
-    }, [])
+	// useEffect(() => {
+    //     postings()
+    // }, [])
 
-	console.log({posting})
+	// console.log({posting})
 
 
 	return (

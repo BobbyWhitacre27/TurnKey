@@ -1,15 +1,43 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { createPosting } from "../api/index.js"
 
-const Post = () => {
+const Post = ({user}) => {
 	const navigate = useNavigate();
 
+	const [title, setTitle] = useState('');
+	const [price, setPrice] = useState(0);
+	const [type, setType] = useState('');
+	const [description, setDescription] = useState('');
 
+	const [message, setMessage] = useState('')
+
+	const userId = user.id
+
+	const date = new Date()
+
+	const handleSubmit = async (event) => {
+        event.preventDefault()
+        if (title === "") {
+            setMessage("Please fill in title")
+            return
+        }
+        if (type === "") {
+            setMessage("Please select For Sale or For Rent")
+            return
+        }
+        if (description === '') {
+            setMessage("Please include a description")
+            return
+        }
+   
+        console.log({userId, title, price, type, date, description})
+        await createPosting(userId, title, price, type, date, description)
+        navigate("/Post_photos")
+    }
 
 	return (
 		<section>
-
-
 			<section
 				class="overflow-hidden bg-[url(https://images.pexels.com/photos/2041627/pexels-photo-2041627.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2)] bg-cover bg-center bg-no-repeat"
 			>
@@ -34,14 +62,16 @@ const Post = () => {
 
 						<div class="rounded-lg bg-white p-8 shadow-lg sm:w-1/2 m-auto lg:col-span-3 lg:p-12">
 							<h1 class="mb-8 text-3xl font-bold">Add A New Posting</h1>
+							{message}
 							<form action="" class="space-y-4">
 								<div>
-									<label class="sr-only" for="name">Name</label>
+									<label class="sr-only" for="name">Title</label>
 									<input
 										class="w-full rounded-lg border-gray-200 border p-3 text-sm"
 										placeholder="Title"
 										type="text"
-										id="name"
+										id="title"
+										onChange={(e) => setTitle(e.target.value)}
 									/>
 								</div>
 
@@ -51,8 +81,9 @@ const Post = () => {
 										<input
 											class="w-full rounded-lg border-gray-200 border p-3 text-sm"
 											placeholder="Price"
-											type="email"
-											id="email"
+											type="integer"
+											id="price"
+											onChange={(e) => setPrice(e.target.value)}
 										/>
 									</div>
 
@@ -67,6 +98,7 @@ const Post = () => {
 											type="radio"
 											tabindex="-1"
 											name="option"
+											onChange={(e) => setType('buy')}
 										/>
 
 										<label
@@ -85,6 +117,7 @@ const Post = () => {
 											type="radio"
 											tabindex="-1"
 											name="option"
+											onChange={(e) => setType('rent')}
 										/>
 
 										<label
@@ -107,12 +140,13 @@ const Post = () => {
 										placeholder="Description - Include contact method, location, and listing details."
 										rows="8"
 										id="message"
+										onChange={(e) => setDescription(e.target.value)}
 									></textarea>
 								</div>
 
 								<div class="mt-4">
 									<button
-										onClick={()=>navigate("/Post_photos")}
+										onClick={handleSubmit}
 										class="inline-block w-full rounded-lg bg-black px-5 py-3 font-medium text-white sm:w-auto"
 									>
 										Add Posting
