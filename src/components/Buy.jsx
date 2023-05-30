@@ -18,8 +18,8 @@ const Buy = ({allPostings}) => {
 		return 	<article class="overflow-hidden rounded-lg shadow transition hover:shadow-lg m-4">
 		<Link to="/">
 		<img
-			alt="Office"
-			src="https://photos.zillowstatic.com/fp/89bf89672fe7b6a175b2546c95df9e5f-cc_ft_1536.webp"
+			alt="House"
+			src="https://images.pexels.com/photos/1029599/pexels-photo-1029599.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
 			class="h-56 w-full object-cover brightness-75"
 		/>
 		<div class="bg-white p-4 sm:p-6">
@@ -58,7 +58,7 @@ const Buy = ({allPostings}) => {
 			<div class="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 p-2">
 			{postPreview}
 			</div>
-			
+
 		</section>
 	)
 }

@@ -18,7 +18,7 @@ const Header = ({ user, setUser, setToken, token }) => {
 
 			<header aria-label="Site Header" class="shadow-sm">
 				<div
-					class="mx-auto flex h-16 max-w-screen-xl items-center justify-between px-4"
+					class="mx-auto flex sm:grid sm:grid-cols-3 h-16 max-w-screen-xl place-items-center px-4"
 				>
 					<Link to="/Profile" class="flex w-0 flex-1 lg:hidden">
 						<button class="rounded-full bg-gray-100 p-2 text-gray-600" type="button">
