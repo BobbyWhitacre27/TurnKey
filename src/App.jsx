@@ -1,6 +1,7 @@
 import './App.css';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { getAllPostings } from "./api";
 
 import Header from './components/Header.jsx'
 import Home from './components/Home.jsx'
@@ -17,7 +18,17 @@ import Post_photos from './components/Post_photos.jsx'
 function App() {
 	const [token, setToken] = useState("");
 	const [user, setUser] = useState([]);
-	const [posting, setPosting] = useState([])
+	const [allPostings, setAllPostings] = useState({})
+	const [refresh, setRefresh] = useState(false)
+
+	const postings = async () => {
+		const allPosts = await getAllPostings();
+		setAllPostings(allPosts)
+	}
+
+	useEffect(() => {
+		postings()
+	}, [refresh])
 
 
 	return (
@@ -29,11 +40,11 @@ function App() {
 					<Route path="/Login" element={<Login setToken={setToken} setUser={setUser} />} />
 					<Route path="/About" element={<About />} />
 					<Route path="/Signup" element={<Signup setToken={setToken} setUser={setUser} />} />
-					<Route path="/Rent" element={<Rent posting={posting} setPosting={setPosting} />} />
-					<Route path="/Profile" element={<Profile posting={posting} setPosting={setPosting} />} />
-					<Route path="/Post" element={<Post user={user} />} />
+					<Route path="/Rent" element={<Rent allPostings={allPostings} />} />
+					<Route path="/Profile" element={<Profile allPostings={allPostings} />} />
+					<Route path="/Post" element={<Post user={user} setRefresh={setRefresh}/>} />
 					<Route path="/Post_photos" element={<Post_photos />} />
-					<Route path="/Buy" element={<Buy posting={posting} setPosting={setPosting} />} />
+					<Route path="/Buy" element={<Buy allPostings={allPostings} />} />
 				</Routes>
 				<Footer />
 			</BrowserRouter>

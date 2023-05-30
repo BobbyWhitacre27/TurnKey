@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { createPosting } from "../api/index.js"
 
-const Post = ({user}) => {
+const Post = ({user, setRefresh}) => {
 	const navigate = useNavigate();
 
 	const [title, setTitle] = useState('');
@@ -30,9 +30,10 @@ const Post = ({user}) => {
             setMessage("Please include a description")
             return
         }
-   
+		setRefresh(true)
         console.log({userId, title, price, type, date, description})
         await createPosting(userId, title, price, type, date, description)
+		setRefresh(false)
         navigate("/Post_photos")
     }
 
