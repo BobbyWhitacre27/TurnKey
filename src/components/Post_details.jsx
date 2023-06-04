@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { getPostingsById, getPhotosByPostId } from "../api";
 
-const Post_details = ({ selectedPost, setSelectedPost, allPostings, allPhotos, allComments }) => {
+const Post_details = ({ selectedPost, setSelectedPost, allPostings, allPhotos, allComments, user }) => {
 	const [postingDetails, setPostingDetails] = useState([])
 	const [postingPhotos, setPostingPhotos] = useState([])
 
@@ -23,6 +23,7 @@ const Post_details = ({ selectedPost, setSelectedPost, allPostings, allPhotos, a
 
 	console.log({ postingDetails })
 	console.log({ postingPhotos })
+	console.log({ user })
 
 	const id = postingDetails.id
 	const price = postingDetails.price
@@ -31,6 +32,14 @@ const Post_details = ({ selectedPost, setSelectedPost, allPostings, allPhotos, a
 	const title = postingDetails.title
 	const description = postingDetails.description
 	const date = (postingDetails.date)
+	const daysAgo = new Date() - date
+	const username = user.username
+	const postUserId = postingDetails.userId
+	const userId = user.id
+	const userAdmin = user.isadmin
+
+	console.log({postUserId})
+	console.log({userId})
 	
 
 
@@ -52,7 +61,7 @@ const Post_details = ({ selectedPost, setSelectedPost, allPostings, allPhotos, a
 								class="aspect-square w-full rounded-xl object-cover"
 							/>
 
-							<div class="grid grid-cols-2 gap-4 lg:mt-4">
+							{/* <div class="grid grid-cols-2 gap-4 lg:mt-4">
 								<img
 									alt="Les Paul"
 									src="https://images.unsplash.com/photo-1456948927036-ad533e53865c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
@@ -76,7 +85,7 @@ const Post_details = ({ selectedPost, setSelectedPost, allPostings, allPhotos, a
 									src="https://images.unsplash.com/photo-1456948927036-ad533e53865c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
 									class="aspect-square w-full rounded-xl object-cover"
 								/>
-							</div>
+							</div> */}
 						</div>
 
 						<div class="sticky top-0">
@@ -108,13 +117,16 @@ const Post_details = ({ selectedPost, setSelectedPost, allPostings, allPhotos, a
 									<p>
 										{description}
 									</p>
+									<p class="mt-2 text-gray-400 text-sm italic">
+										Posted by: {username}
+									</p>
 								</div>
 
 							</div>
 
 
 
-							<div class="mt-8 mb-2 text-left">Comments</div>
+							<div class="mt-6 mb-2 text-left">Comments</div>
 							<hr class="h-px my-2 bg-gray-700 dark:bg-gray-700"></hr>
 
 							<p class="text-sm text-left text-gray-500 mb-2">No comments.</p>
@@ -148,7 +160,15 @@ const Post_details = ({ selectedPost, setSelectedPost, allPostings, allPhotos, a
 								</button>
 							</div>
 
+								{userId === postUserId || userAdmin ? <button
+									type="submit"
+									class="block m-auto rounded bg-red-600 px-5 py-3 text-xs font-medium text-white hover:bg-red-500 mt-2"
+								>
+									Delete Post
+								</button> : ""}
+
 						</div>
+	
 					</div>
 				</div>
 			</section>

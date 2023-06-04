@@ -41,7 +41,7 @@ const Profile = ({ allPostings, user, setSelectedPost }) => {
 					<p class="line-clamp-3 text-sm/relaxed text-gray-500 text-left italic">
 						{p.description}
 					</p>
-					<div class="flex justify-between text-xs text-gray-800 mt-2"><p>name</p><p>1 Comment</p></div>
+					<div class="text-xs text-right text-gray-800 mt-2 mb-2"><p>1 Comment(s)</p></div>
 				</div>
 			</Link>
 		</div>
