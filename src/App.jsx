@@ -19,7 +19,9 @@ function App() {
 	const [token, setToken] = useState("");
 	const [user, setUser] = useState([]);
 	const [allPostings, setAllPostings] = useState({})
+	const [allComments, setSelectedComments] = useState({})
 	const [allPhotos, setAllPhotos] = useState({})
+	const [selectedPost, setSelectedPost] = useState(0)
 	const [refresh, setRefresh] = useState(false)
 
 	const postings = async () => {
@@ -49,7 +51,7 @@ function App() {
 					<Route path="/About" element={<About />} />
 					<Route path="/Signup" element={<Signup setToken={setToken} setUser={setUser} />} />
 					<Route path="/Rent" element={<Rent allPostings={allPostings} allPhotos={allPhotos} />} />
-					<Route path="/Profile" element={<Profile allPostings={allPostings} allPhotos={allPhotos} />} />
+					<Route path="/Profile" element={<Profile allPostings={allPostings} allPhotos={allPhotos} user={user} />} />
 					<Route path="/Post" element={<Post user={user} setRefresh={setRefresh}/>} />
 					<Route path="/Post_photos" element={<Post_photos allPostings={allPostings} user={user} allPhotos={allPhotos} setAllPhotos={setAllPhotos} setRefresh={setRefresh}/>} />
 					<Route path="/Buy" element={<Buy allPostings={allPostings} allPhotos={allPhotos}/>} />

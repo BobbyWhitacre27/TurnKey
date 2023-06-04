@@ -18,23 +18,18 @@ const Post_photos = ({ allPostings, user, setRefresh, allPhotos, setAllPhotos })
 
 	const userPosts = allPostings.filter((p) => p.userId === userId)
 
-	console.log({ userId })
-	console.log({ allPostings })
-	console.log({ userPosts })
-
 	const lastUserPost = userPosts[userPosts.length - 1]
 
 	const lastUserPostId = lastUserPost?.id
 
-
-	console.log({ lastUserPostId })
-
+	
 
 	const handleAdd = async (event) => {
 		event.preventDefault();
-		setAddingPhoto(true)
+
 		console.log(lastUserPostId, imageURL)
 		await addPhoto(lastUserPostId, imageURL)
+		setAddingPhoto(true)
 		setAddingPhoto(false)
 	}
 
