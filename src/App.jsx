@@ -51,7 +51,7 @@ function App() {
 					<Route path="/Rent" element={<Rent allPostings={allPostings} allPhotos={allPhotos} />} />
 					<Route path="/Profile" element={<Profile allPostings={allPostings} allPhotos={allPhotos} />} />
 					<Route path="/Post" element={<Post user={user} setRefresh={setRefresh}/>} />
-					<Route path="/Post_photos" element={<Post_photos allPostings={allPostings} user={user} allPhotos={allPhotos} setRefresh={setRefresh}/>} />
+					<Route path="/Post_photos" element={<Post_photos allPostings={allPostings} user={user} allPhotos={allPhotos} setAllPhotos={setAllPhotos} setRefresh={setRefresh}/>} />
 					<Route path="/Buy" element={<Buy allPostings={allPostings} allPhotos={allPhotos}/>} />
 				</Routes>
 				<Footer />

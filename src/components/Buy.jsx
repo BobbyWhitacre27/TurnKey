@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { getAllPostings } from "../api";
 
-const Buy = ({ allPostings }) => {
+const Buy = ({ allPostings, allPhotos }) => {
 
 	const buyPosts = allPostings.filter((p) => p.type === "buy")
 
@@ -14,6 +14,8 @@ const Buy = ({ allPostings }) => {
 			style: 'currency',
 			currency: 'USD',
 		})
+
+		const photos = allPhotos.filter((f) => p.id === f.postId)
 
 		return <div class="overflow-hidden rounded-lg shadow transition m-4">
 			<Link class="hover:text-black" to="/">

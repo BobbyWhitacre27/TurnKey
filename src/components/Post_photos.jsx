@@ -1,12 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-import { addPhoto } from "../api";
+import { addPhoto, getAllPhotos } from "../api";
 
 
-const Post_photos = ({ allPostings, user, setRefresh, allPhotos }) => {
+const Post_photos = ({ allPostings, user, setRefresh, allPhotos, setAllPhotos }) => {
 	const navigate = useNavigate();
 	const [imageURL, setImageURL] = useState('');
+	const [addingPhoto, setAddingPhoto] = useState(false);
+	
+	const photos = async () => {
+		const allPhotos = await getAllPhotos();
+		setAllPhotos(allPhotos)
+	}
 
 	const userId = user.id
 
@@ -21,16 +27,20 @@ const Post_photos = ({ allPostings, user, setRefresh, allPhotos }) => {
 	const lastUserPostId = lastUserPost?.id
 
 
-
 	console.log({ lastUserPostId })
 
 
 	const handleAdd = async (event) => {
 		event.preventDefault();
+		setAddingPhoto(true)
 		console.log(lastUserPostId, imageURL)
 		await addPhoto(lastUserPostId, imageURL)
-
+		setAddingPhoto(false)
 	}
+
+	useEffect(() => {
+		photos()
+	}, [addingPhoto])
 
 	return (
 		<section>
@@ -60,6 +70,7 @@ const Post_photos = ({ allPostings, user, setRefresh, allPhotos }) => {
 						<h1 class="mb-8 text-3xl font-bold">Add Photos</h1>
 						<form action="" class="space-y-4">
 
+					
 
 							<div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
 								<div>
@@ -69,6 +80,7 @@ const Post_photos = ({ allPostings, user, setRefresh, allPhotos }) => {
 										placeholder="Image URL"
 										type="text"
 										id="name"
+										onChange={(e) => setImageURL(e.target.value)}
 									/>
 								</div>
 
