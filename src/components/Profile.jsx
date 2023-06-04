@@ -75,27 +75,23 @@ const Profile = ({ allPostings, user, setSelectedPost }) => {
 
 			<section>
 				<div
-					class="mx-auto max-w-screen-xl px-4 py-8 sm:py-12 sm:px-6 lg:py-16 lg:px-8"
+					class="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8 py-4"
 				>
-					<div class="grid grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-16">
+					<div class="grid grid-cols-1">
 						<div
 							class="relative overflow-hidden rounded-lg lg:order-last lg:h-full"
 						>
-							<img
-								alt="Party"
-								src="https://img.freepik.com/free-icon/user_318-159711.jpg"
-								class="absolute inset-8 h-full m-auto"
-							/>
+					
 						</div>
 
-						<div class="lg:py-24">
+						<div class="">
 							<h2 class="text-3xl font-bold sm:text-4xl">Welcome back, {user.username}!</h2>
 
 
 
 							<div
 
-								class="mt-8 inline-block rounded bg-indigo-600 px-12 py-3 text-xl font-bold text-white transition hover:bg-indigo-700 focus:outline-none focus:ring focus:ring-yellow-400"
+								class="mt-8 inline-block rounded bg-indigo-600 px-12 py-3 text-xl font-bold text-white transition focus:outline-none focus:ring focus:ring-yellow-400"
 							>
 								Total Postings: {userPosts.length}
 							</div>

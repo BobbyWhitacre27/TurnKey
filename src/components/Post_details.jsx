@@ -28,6 +28,7 @@ const Post_details = ({ selectedPost, setSelectedPost, allPostings, allPhotos, a
 	const id = postingDetails.id
 	const price = postingDetails.price
 	const photo = postingPhotos[0]?.photo
+	const photoNotFound = "https://static.vecteezy.com/system/resources/previews/005/337/799/original/icon-image-not-found-free-vector.jpg"
 	const type = postingDetails.type
 	const title = postingDetails.title
 	const description = postingDetails.description
@@ -37,6 +38,7 @@ const Post_details = ({ selectedPost, setSelectedPost, allPostings, allPhotos, a
 	const postUserId = postingDetails.userId
 	const userId = user.id
 	const userAdmin = user.isadmin
+
 
 	console.log({postUserId})
 	console.log({userId})
@@ -57,7 +59,7 @@ const Post_details = ({ selectedPost, setSelectedPost, allPostings, allPhotos, a
 						<div class="grid grid-cols-2 gap-4 md:grid-cols-1">
 							<img
 								alt="House"
-								src={photo ? photo : ""}
+								src={photo ? photo : photoNotFound}
 								class="aspect-square w-full rounded-xl object-cover"
 							/>
 
