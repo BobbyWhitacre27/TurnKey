@@ -62,7 +62,7 @@ const Post = ({user, setRefresh}) => {
 				
 
 						<div class="rounded-lg bg-white p-8 shadow-lg sm:w-1/2 m-auto lg:col-span-3 lg:p-12">
-							<h1 class="mb-8 text-3xl font-bold">Add A New Posting</h1>
+							<h1 class="mb-8 text-3xl font-bold">Create Posting</h1>
 							{message}
 							<form action="" class="space-y-4">
 								<div>

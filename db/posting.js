@@ -56,6 +56,18 @@ async function getPostingByUserId(id) {
     return posting;
 }
 
+async function getPostingById(id) {
+    const {
+        rows: [posting],
+    } = await client.query(
+        `
+    SELECT * FROM posting
+    WHERE id=$1;
+  `, [id]);
+
+    return posting;
+}
+
 async function updatePostingTitle({
     id,
     title}) {
@@ -156,5 +168,6 @@ module.exports = {
 	updatePostingDescription,
 	updatePostingType,
 	deletePosting,
-	getPostingsByType
+	getPostingsByType,
+	getPostingById
 };

@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { getPostingsByType, getAllPostings } from "../api";
+import { getPostingsByType, getAllPostings, getPhotosByPostId } from "../api";
 
-const Rent = ({ allPostings, allPhotos}) => {
+const Rent = ({ allPostings, allPhotos, setSelectedPost}) => {
 
 	const buyPosts = allPostings.filter((p) => p.type === "rent")
 
@@ -26,7 +26,7 @@ const Rent = ({ allPostings, allPhotos}) => {
 		console.log({photos})
 
 		return <div class="overflow-hidden rounded-lg shadow transition m-4">
-			<Link class="hover:text-black" to="/">
+			<Link class="hover:text-black"  onClick={() => setSelectedPost(p.id)} to="/Post_details">
 				<div class="relative">
 					<img
 						alt="House"

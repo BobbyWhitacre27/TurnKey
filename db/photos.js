@@ -30,8 +30,8 @@ async function getAllPhotos() {
 async function getAllPhotosByPostId(id) {
     const { rows: photos } = await client.query(`
     SELECT * FROM photos
-	WHERE "postId"=${id};
-    `);
+	WHERE "postId"=$1;
+    `, [id]);
 
     return photos;
 }

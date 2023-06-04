@@ -111,3 +111,25 @@ export async function getAllPhotos() {
         console.error(err);
     }
 }
+
+export async function getPostingsById(id) {
+
+    try {
+        const res = await fetch(`${APIURL}/posting/${id}`);
+        const json = await res.json();
+        return json;
+    } catch (err) {
+        console.error(err);
+    }
+}
+
+export async function getPhotosByPostId(postId) {
+
+    try {
+        const res = await fetch(`${APIURL}/photos/${postId}`);
+        const json = await res.json();
+        return json;
+    } catch (err) {
+        console.error(err);
+    }
+}

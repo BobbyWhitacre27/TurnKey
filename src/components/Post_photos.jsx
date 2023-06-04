@@ -7,6 +7,7 @@ import { addPhoto, getAllPhotos } from "../api";
 const Post_photos = ({ allPostings, user, setRefresh, allPhotos, setAllPhotos }) => {
 	const navigate = useNavigate();
 	const [imageURL, setImageURL] = useState('');
+	const [addedImages, setAddedImages] = useState([])
 	const [addingPhoto, setAddingPhoto] = useState(false);
 	
 	const photos = async () => {
@@ -22,15 +23,19 @@ const Post_photos = ({ allPostings, user, setRefresh, allPhotos, setAllPhotos })
 
 	const lastUserPostId = lastUserPost?.id
 
-	
+	const postPhotos = allPhotos.filter((f) => lastUserPostId === f.postId)
+
+	const photosOfPosting = postPhotos.map((f) => f.photo)
 
 	const handleAdd = async (event) => {
 		event.preventDefault();
 
 		console.log(lastUserPostId, imageURL)
 		await addPhoto(lastUserPostId, imageURL)
+		setAddedImages(imageURL)
 		setAddingPhoto(true)
 		setAddingPhoto(false)
+		navigate("/Profile")
 	}
 
 	useEffect(() => {
@@ -53,8 +58,6 @@ const Post_photos = ({ allPostings, user, setRefresh, allPhotos, setAllPhotos })
 			</section>
 
 
-		
-
 
 			<section class="">
 				<div class="mx-auto max-w-screen-xl px-4 py-12 sm:px-6 lg:px-8">
@@ -62,12 +65,12 @@ const Post_photos = ({ allPostings, user, setRefresh, allPhotos, setAllPhotos })
 
 
 					<div class="rounded-lg bg-white p-8 shadow-lg sm:w-1/2 m-auto lg:col-span-3 lg:p-12">
-						<h1 class="mb-8 text-3xl font-bold">Add Photos</h1>
+						<h1 class="mb-8 text-3xl font-bold">Add Photo</h1>
 						<form action="" class="space-y-4">
 
 					
 
-							<div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+							<div class="grid grid-cols-1 gap-4 sm:grid-cols-1">
 								<div>
 									<label class="sr-only" for="name">Image URL</label>
 									<input
@@ -79,14 +82,14 @@ const Post_photos = ({ allPostings, user, setRefresh, allPhotos, setAllPhotos })
 									/>
 								</div>
 
-								<div class="">
+								{/* <div class="">
 									<button
 										onClick={handleAdd}
 										class="inline-block w-full rounded-lg bg-gray-200 px-5 py-3 font-medium  sm:w-auto"
 									>
 										Add
 									</button>
-								</div>
+								</div> */}
 
 
 							</div>
@@ -104,7 +107,7 @@ const Post_photos = ({ allPostings, user, setRefresh, allPhotos, setAllPhotos })
 							<div class="mt-4">
 								<button
 								
-									onClick={() => navigate("/Profile")}
+									onClick={handleAdd}
 									class="inline-block w-full rounded-lg bg-black px-5 py-3 font-medium text-white sm:w-auto"
 								>
 									Complete Posting

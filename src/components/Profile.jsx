@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-const Profile = ({ allPostings, user }) => {
+const Profile = ({ allPostings, user, setSelectedPost }) => {
 
 
 
 
 	const userPosts = allPostings.filter((p) => p.userId === user.id)
+
+	console.log({userPosts})
 
 	const postPreview = userPosts.map((p) => {
 
@@ -18,7 +20,7 @@ const Profile = ({ allPostings, user }) => {
 		})
 
 		return <div class="overflow-hidden rounded-lg shadow transition m-4">
-			<Link class="hover:text-black" to="/">
+			<Link class="hover:text-black" onClick={() => setSelectedPost(p.id)} to="/Post_details">
 				<div class="relative">
 					<img
 						alt="House"

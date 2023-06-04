@@ -10,7 +10,8 @@ const {
 	updatePostingDescription,
 	updatePostingType,
 	deletePosting,
-	getPostingsByType
+	getPostingsByType,
+	getPostingById
 } = require('../db/posting');
 
 
@@ -18,6 +19,19 @@ const {
 apiRouter.get('/', async (req, res, next) => {
     try {
         const postings = await getAllPostings()
+
+        res.send(
+            postings
+        )
+    } catch (error) {
+        next(error)
+    }
+});
+
+apiRouter.get('/:id', async (req, res, next) => {
+    try {
+		const id = req.params.id;
+        const postings = await getPostingById(id)
 
         res.send(
             postings
