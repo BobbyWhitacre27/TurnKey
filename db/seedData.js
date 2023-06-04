@@ -1,6 +1,8 @@
 const { client } = require('.');
 const { createUser } = require('./users');
 const { createPosting } = require('./posting');
+const { createPhoto } = require('./photos');
+const { createComment } = require('./comments');
 
 async function dropTables() {
     try {
@@ -44,13 +46,13 @@ async function createTables() {
 	  CREATE TABLE comments (
         id SERIAL PRIMARY KEY, 
         "userId" INTEGER REFERENCES users(id),
-		"postingId" INTEGER REFERENCES posting(id),
+		"postId" INTEGER REFERENCES posting(id),
 		comment TEXT
       );
 
 	  CREATE TABLE photos (
         id SERIAL PRIMARY KEY, 
-		"postingId" INTEGER REFERENCES posting(id),
+		"postId" INTEGER REFERENCES posting(id),
 		photo TEXT
       );
   
@@ -104,6 +106,45 @@ async function createInitialPosting() {
     } catch (error) { }
 }
 
+async function createInitialPhoto() {
+    try {
+        console.log('Starting to create photo...');
+        const photoToCreate = [
+            {
+                postId: 1,
+                photo: "https://images.pexels.com/photos/1115804/pexels-photo-1115804.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+            },
+
+        ];
+
+        const photo = await Promise.all(photoToCreate.map(createPhoto));
+
+        console.log('photo created:');
+        console.log(photo);
+        console.log('Finished creating photo!');
+    } catch (error) { }
+}
+
+async function createInitialComment() {
+    try {
+        console.log('Starting to create comment...');
+        const commentToCreate = [
+            {
+                userId: 1,
+				postId: 1,
+                comment: "I'll take it!",
+            },
+
+        ];
+
+        const comment = await Promise.all(commentToCreate.map(createComment));
+
+        console.log('comment created:');
+        console.log(comment);
+        console.log('Finished creating comment!');
+    } catch (error) { }
+}
+
 async function rebuildDB() {
     try {
       client.connect();
@@ -111,6 +152,8 @@ async function rebuildDB() {
       await createTables();
       await createInitialUsers();
       await createInitialPosting();
+	  await createInitialPhoto();
+	  await createInitialComment();
     } catch (error) {
       console.log('Error during rebuildDB');
       throw error;

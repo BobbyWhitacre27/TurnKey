@@ -4,6 +4,7 @@ const apiRouter = express.Router();
 const {
     createPhoto,
 	getAllPhotosByPostId,
+	getAllPhotos,
 	deletePhoto
 } = require('../db/photos');
 
@@ -21,6 +22,17 @@ apiRouter.get('/:postId', async (req, res, next) => {
     }
 });
 
+apiRouter.get('/', async (req, res, next) => {
+    try {
+        const photos = await getAllPhotos()
+
+        res.send(
+            photos
+        )
+    } catch (error) {
+        next(error)
+    }
+});
 
 // Add new photo
 apiRouter.post('/', async (req, res, next) => {

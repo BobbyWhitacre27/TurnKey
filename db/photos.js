@@ -19,6 +19,14 @@ async function createPhoto({
     return photos;
 }
 
+async function getAllPhotos() {
+    const { rows: photos } = await client.query(`
+    SELECT * FROM photos;
+    `);
+
+    return photos;
+}
+
 async function getAllPhotosByPostId(id) {
     const { rows: photos } = await client.query(`
     SELECT * FROM photos
@@ -47,5 +55,6 @@ async function deletePhoto(id) {
 module.exports = {
     createPhoto,
 	getAllPhotosByPostId,
-	deletePhoto
+	deletePhoto,
+	getAllPhotos
 };

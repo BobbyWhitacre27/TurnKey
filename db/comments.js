@@ -29,6 +29,13 @@ async function getAllCommentsByPostId(id) {
     return comments;
 }
 
+async function getAllComments() {
+    const { rows: comments } = await client.query(`
+    SELECT * FROM comments;
+    `);
+
+    return comments;
+}
 
 async function deleteComment(id) {
     const {
@@ -48,5 +55,6 @@ async function deleteComment(id) {
 module.exports = {
     createComment,
 	getAllCommentsByPostId,
-	deleteComment
+	deleteComment,
+	getAllComments
 };

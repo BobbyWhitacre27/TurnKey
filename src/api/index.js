@@ -79,3 +79,35 @@ export async function createPosting(
         console.error(err);
     }
 }
+
+export async function addPhoto(
+	postId, photo
+) {
+    try {
+        const res = await fetch(`${APIURL}/photos`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+				postId: postId, 
+				photo: photo
+            }),
+        });
+        const json = res.json();
+        return json;
+    } catch (err) {
+        console.error(err);
+    }
+}
+
+export async function getAllPhotos() {
+
+    try {
+        const res = await fetch(`${APIURL}/photos`);
+        const json = await res.json();
+        return json;
+    } catch (err) {
+        console.error(err);
+    }
+}
