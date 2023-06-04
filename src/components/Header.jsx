@@ -20,8 +20,24 @@ const Header = ({ user, setUser, setToken, token }) => {
 				<div
 					class="mx-auto flex sm:grid sm:grid-cols-3 h-16 max-w-screen-xl place-items-center px-4"
 				>
-					<Link to="/Profile" class="flex w-0 flex-1 lg:hidden">
-						<button class="rounded-full bg-gray-100 p-2 text-gray-600" type="button">
+			
+
+					<div class="flex items-center gap-4">
+						<Link to="/">
+							<span class="sr-only">Logo</span>
+							<img src="https://i.ibb.co/KL6qQD4/Turn-Key-Logo-2.png" class="h-12"></img>
+							<span class="h-10 w-20 rounded-lg bg-gray-200"></span>
+						</Link>
+
+						
+					</div>
+
+					<div class="flex w-0 flex-1 justify-end lg:hidden">
+
+					<Link to="/Profile" >
+
+
+					<button class="rounded-full bg-gray-100 p-2 text-gray-600" type="button">
 							<span class="sr-only">Account</span>
 							<svg
 								class="h-5 w-5"
@@ -39,20 +55,9 @@ const Header = ({ user, setUser, setToken, token }) => {
 								></path>
 							</svg>
 						</button>
-					</Link>
-
-					<div class="flex items-center gap-4">
-						<Link to="/">
-							<span class="sr-only">Logo</span>
-							<img src="https://i.ibb.co/KL6qQD4/Turn-Key-Logo-2.png" class="h-12"></img>
-							<span class="h-10 w-20 rounded-lg bg-gray-200"></span>
 						</Link>
 
-						
-					</div>
-
-					<div class="flex w-0 flex-1 justify-end lg:hidden">
-						<button class="rounded-full bg-gray-100 p-2 text-gray-500" type="button">
+						{/* <button class="rounded-full bg-gray-100 p-2 text-gray-500" type="button">
 							<span class="sr-only">Menu</span>
 							<svg
 								class="h-5 w-5"
@@ -67,7 +72,7 @@ const Header = ({ user, setUser, setToken, token }) => {
 									fill-rule="evenodd"
 								></path>
 							</svg>
-						</button>
+						</button> */}
 					</div>
 
 					<nav

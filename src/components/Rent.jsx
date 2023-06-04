@@ -41,8 +41,8 @@ const Rent = ({ allPostings, allPhotos, setSelectedPost}) => {
 							{p.title}
 						</div>
 					
-					<div class="flex justify-between mt-0.5 text-md">
-					{price}	
+					<div class="flex mt-0.5 text-md">
+					{price}<span class="text-gray-400 text-xs pt-1">/month</span>
 					</div>
 					<p class="line-clamp-3 text-sm/relaxed text-gray-500 text-left italic">
 						{p.description}
