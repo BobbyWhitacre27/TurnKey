@@ -117,7 +117,7 @@ const Header = ({ user, setUser, setToken, token }) => {
 						<Link to="/" class="shrink-0 px-4 text-gray-900">Home</Link>
 						<Link to="/Buy" class="shrink-0 px-4 text-gray-900">Buy</Link>
 						<Link to="/Rent" class="shrink-0 px-4 text-gray-900">Rent</Link>
-						<Link to="/Post" class="shrink-0 px-4 text-gray-900">Post</Link>
+						{token === "" ? "" : <div><Link to="/Post" class="shrink-0 px-4 text-gray-900">Post</Link></div>}
 					</nav>
 				</div>
 			</header>

@@ -50,11 +50,11 @@ function App() {
 					<Route path="/Login" element={<Login setToken={setToken} setUser={setUser} />} />
 					<Route path="/Post_details" element={<Post_details selectedPost={selectedPost} setSelectedPost={setSelectedPost} allPostings={allPostings} user={user} allPhotos={allPhotos} setAllPhotos={setAllPhotos} setRefresh={setRefresh}/>} />
 					<Route path="/Signup" element={<Signup setToken={setToken} setUser={setUser} />} />
-					<Route path="/Rent" element={<Rent allPostings={allPostings} allPhotos={allPhotos} selectedPost={selectedPost} setSelectedPost={setSelectedPost} />} />
+					<Route path="/Rent" element={<Rent allPostings={allPostings} allPhotos={allPhotos} selectedPost={selectedPost} setSelectedPost={setSelectedPost} user={user}/>} />
 					<Route path="/Profile" element={<Profile allPostings={allPostings} allPhotos={allPhotos} user={user} selectedPost={selectedPost} setSelectedPost={setSelectedPost} />} />
 					<Route path="/Post" element={<Post user={user} setRefresh={setRefresh}/>} />
 					<Route path="/Post_photos" element={<Post_photos allPostings={allPostings} user={user} allPhotos={allPhotos} setAllPhotos={setAllPhotos} setRefresh={setRefresh}/>} />
-					<Route path="/Buy" element={<Buy allPostings={allPostings} allPhotos={allPhotos} selectedPost={selectedPost} setSelectedPost={setSelectedPost}/>} />
+					<Route path="/Buy" element={<Buy allPostings={allPostings} allPhotos={allPhotos} selectedPost={selectedPost} setSelectedPost={setSelectedPost} user={user}/>} />
 				</Routes>
 				<Footer />
 			</BrowserRouter>

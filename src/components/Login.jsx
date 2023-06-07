@@ -103,7 +103,7 @@ const Login = ({ setToken, setUser }) => {
 				<div class="relative h-64 w-full sm:h-96 lg:h-full lg:w-1/2">
 					<img
 						alt="Welcome"
-						src="https://images.pexels.com/photos/1022936/pexels-photo-1022936.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+						src="https://images.pexels.com/photos/1876045/pexels-photo-1876045.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
 						class="absolute inset-0 h-full w-full object-cover"
 					/>
 				</div>

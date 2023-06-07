@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { } from "../api";
 
-const Buy = ({ allPostings, allPhotos, setSelectedPost }) => {
+const Buy = ({ allPostings, allPhotos, setSelectedPost, user }) => {
 
 	const buyPosts = allPostings.filter((p) => p.type === "buy")
 
@@ -30,6 +30,7 @@ const Buy = ({ allPostings, allPhotos, setSelectedPost }) => {
 						class="h-56 w-full object-cover brightness-100"
 					/>
 					<div class="absolute top-2 right-2 bg-black px-3 rounded-lg font-bold text-white bg-opacity-75">{date.toLocaleDateString('en-US')}</div>
+					{user.id === p.userId ? <div class="absolute top-2 left-2 bg-red-600 px-3 rounded-lg font-bold text-white bg-opacity-75">My Post</div> : ""}
 				</div>
 				<div class="px-4 py-2">
 					

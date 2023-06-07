@@ -34,6 +34,7 @@ const Profile = ({ allPostings, user, setSelectedPost, allPhotos }) => {
 						class="h-56 w-full object-cover brightness-100"
 					/>
 					<div class="absolute top-2 right-2 bg-black px-3 rounded-lg font-bold text-white bg-opacity-75">{date.toLocaleDateString('en-US')}</div>
+					{user.id === p.userId ? <div class="absolute top-2 left-2 bg-red-600 px-3 rounded-lg font-bold text-white bg-opacity-75">My Post</div> : ""}
 				</div>
 				<div class="px-4 py-2">
 
