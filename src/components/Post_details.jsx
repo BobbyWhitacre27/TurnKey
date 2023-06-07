@@ -1,10 +1,23 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import { getPostingsById, getPhotosByPostId } from "../api";
+import { Link, useNavigate } from "react-router-dom";
+import { getPostingsById, getPhotosByPostId, deletePost, deletePhoto, addPhoto } from "../api";
 
-const Post_details = ({ selectedPost, setSelectedPost, allPostings, allPhotos, allComments, user }) => {
+const Post_details = ({ selectedPost, setSelectedPost, allPostings, allPhotos, allComments, user, setRefresh, refresh }) => {
 	const [postingDetails, setPostingDetails] = useState([])
 	const [postingPhotos, setPostingPhotos] = useState([])
+	const [postingRefresh, setPostingRefresh] = useState(false)
+	const [imageURL, setImageURL] = useState('');
+
+	const [newTitle, setNewTitle] = useState('');
+	const [newDescription, setNewDescription] = useState('');
+	const [newPrice, setNewPrice] = useState(0);
+
+
+	const [editTitle, setEditTitle] = useState(false)
+	const [editDescription, setEditDescription] = useState(false)
+	const [editPrice, setEditPrice] = useState(false)
+
+	const navigate = useNavigate();
 
 	const posting = async () => {
 		const posting = await getPostingsById(selectedPost);
@@ -16,78 +29,127 @@ const Post_details = ({ selectedPost, setSelectedPost, allPostings, allPhotos, a
 		setPostingPhotos(photos)
 	}
 
+
+	const handleAddPhoto = async () => {
+		setPostingRefresh(true)
+		setRefresh(true)
+		await addPhoto(selectedPost, imageURL)
+		setPostingRefresh(false)
+		setRefresh(false)
+	}
+
+	const handleDeletePost = async () => {
+		setRefresh(true)
+		if(postingPhotos.length > 0){
+			window.alert("Please delete all photos first.")
+			return
+		}
+		await deletePost(selectedPost)
+		setRefresh(false)
+		navigate(-1)
+		window.alert("Post successfully deleted!")
+	}
+
+	const handleDeletePhoto = async (id) => {
+		setPostingRefresh(true)
+		setRefresh(true)
+		await deletePhoto(id)
+		setPostingRefresh(false)
+		setRefresh(false)
+	}
+
 	useEffect(() => {
 		posting()
 		photos()
-	}, [])
-
-	console.log({ postingDetails })
-	console.log({ postingPhotos })
-	console.log({ user })
+	}, [postingRefresh, refresh])
 
 	const id = postingDetails.id
 	const price = postingDetails.price
-	const photo = postingPhotos[0]?.photo
-	const photoNotFound = "https://static.vecteezy.com/system/resources/previews/005/337/799/original/icon-image-not-found-free-vector.jpg"
+	const photo1 = postingPhotos[0]?.photo
+	const photoNotFound = <img class="aspect-square w-full rounded-xl object-cover" src="https://static.vecteezy.com/system/resources/previews/005/337/799/original/icon-image-not-found-free-vector.jpg"></img>
 	const type = postingDetails.type
 	const title = postingDetails.title
 	const description = postingDetails.description
 	const date = (postingDetails.date)
 	const daysAgo = new Date() - date
-	const username = user.username
+	
 	const postUserId = postingDetails.userId
+	const username = user.username
 	const userId = user.id
 	const userAdmin = user.isadmin
 
 
-	console.log({postUserId})
-	console.log({userId})
-	
+	const photoDisplay = postingPhotos.map((p) => {
+		return <div>
+			{photo1 === p.photo ? <div class="relative"><img
+				alt="House"
+				src={photo1}
+				class="aspect-square w-full rounded-xl object-cover"
+			/>
+				{userId === postUserId || userAdmin ? <button onClick={() => handleDeletePhoto(p.id)}>
+					<img class="absolute top-4 right-4 h-6" src="https://pixy.org/src/439/4393715.png">
+					</img>
+				</button> : ""}
+			</div> : ""}
+
+			<div class="grid grid-cols-2 gap-4">
+				{photo1 === p.photo ? "" :
+					<div class="relative">
+						<img
+							alt="House"
+							src={p.photo}
+							class="aspect-square w-full rounded-xl object-cover"
+						/>
+						{userId === postUserId || userAdmin ? <button onClick={() => handleDeletePhoto(p.id)}>
+							<img class="absolute top-4 right-4 h-6" src="https://pixy.org/src/439/4393715.png">
+							</img>
+						</button> : ""}
+					</div>}
+			</div>
+		</div>
+	})
+
 
 
 	return (
 		<section>
 
-
-
-
-
-
-			<section>
 				<div class="relative mx-auto max-w-screen-xl px-4 py-8">
 					<div class="grid grid-cols-1 items-start gap-8 md:grid-cols-2">
 						<div class="grid grid-cols-2 gap-4 md:grid-cols-1">
-							<img
-								alt="House"
-								src={photo ? photo : photoNotFound}
-								class="aspect-square w-full rounded-xl object-cover"
-							/>
 
-							{/* <div class="grid grid-cols-2 gap-4 lg:mt-4">
-								<img
-									alt="Les Paul"
-									src="https://images.unsplash.com/photo-1456948927036-ad533e53865c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
-									class="aspect-square w-full rounded-xl object-cover"
-								/>
+							{photoDisplay.length > 0 ? photoDisplay : photoNotFound}
 
-								<img
-									alt="Les Paul"
-									src="https://images.unsplash.com/photo-1456948927036-ad533e53865c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
-									class="aspect-square w-full rounded-xl object-cover"
-								/>
+							{userId === postUserId || userAdmin ?
 
-								<img
-									alt="Les Paul"
-									src="https://images.unsplash.com/photo-1456948927036-ad533e53865c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
-									class="aspect-square w-full rounded-xl object-cover"
-								/>
+								<div>
+									<div class="grid grid-cols-1 m-auto mt-2 gap-4 sm:grid-cols-2">
+										<div>
+											<label class="sr-only" for="name">Image URL</label>
+											<input
+												class="w-full rounded-lg border-gray-200 border p-3 text-sm"
+												placeholder="Image URL"
+												type="text"
+												id="name"
+												onChange={(e) => setImageURL(e.target.value)}
+											/>
+										</div>
 
-								<img
-									alt="Les Paul"
-									src="https://images.unsplash.com/photo-1456948927036-ad533e53865c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
-									class="aspect-square w-full rounded-xl object-cover"
-								/>
-							</div> */}
+										<div class="">
+											<button
+												onClick={handleAddPhoto}
+												class="inline-block w-full rounded-lg bg-gray-200 px-5 py-3 font-medium  sm:w-auto"
+											>
+												Add
+											</button>
+										</div>
+
+
+										</div> 
+									</div>
+
+								: ""}
+
 						</div>
 
 						<div class="sticky top-0">
@@ -98,7 +160,7 @@ const Post_details = ({ selectedPost, setSelectedPost, allPostings, allPhotos, a
 								>
 									To {type}
 								</strong>
-								{date}
+								{/* {date} */}
 							</div>
 
 
@@ -161,22 +223,22 @@ const Post_details = ({ selectedPost, setSelectedPost, allPostings, allPhotos, a
 									Add Comment
 								</button>
 							</div>
+							{userId === postUserId || userAdmin ?
 
-								{userId === postUserId || userAdmin ? <button
-									type="submit"
+
+
+								<button
+									onClick={handleDeletePost}
 									class="block m-auto rounded bg-red-600 px-5 py-3 text-xs font-medium text-white hover:bg-red-500 mt-2"
 								>
 									Delete Post
-								</button> : ""}
+								</button>
+								: ""}
 
 						</div>
-	
+
 					</div>
 				</div>
-			</section>
-
-
-
 
 		</section>
 	)

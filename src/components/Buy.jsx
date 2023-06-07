@@ -15,15 +15,19 @@ const Buy = ({ allPostings, allPhotos, setSelectedPost }) => {
 			currency: 'USD',
 		})
 
-		const photos = allPhotos.filter((f) => p.id === f.postId)
+		const postPhotos = allPhotos.filter((f) => p.id === f.postId)
+
+		const photos = postPhotos.map((f) => f.photo)[0]
+
+		const imageNotFound = "https://static.vecteezy.com/system/resources/previews/005/337/799/original/icon-image-not-found-free-vector.jpg"
 
 		return <div class="overflow-hidden rounded-lg shadow transition m-4">
 			<Link class="hover:text-black"  onClick={() => setSelectedPost(p.id)} to="/Post_details">
 				<div class="relative">
 					<img
 						alt="House"
-						src="https://images.pexels.com/photos/1029599/pexels-photo-1029599.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-						class="h-56 w-full object-cover brightness-75"
+						src={photos ? photos : imageNotFound}
+						class="h-56 w-full object-cover brightness-100"
 					/>
 					<div class="absolute top-2 right-2 bg-black px-3 rounded-lg font-bold text-white bg-opacity-75">{date.toLocaleDateString('en-US')}</div>
 				</div>
@@ -39,7 +43,7 @@ const Buy = ({ allPostings, allPhotos, setSelectedPost }) => {
 					<p class="line-clamp-3 text-sm/relaxed text-gray-500 text-left italic">
 						{p.description}
 					</p>
-					<div class="text-xs text-right text-gray-800 mt-2 mb-2"><p>1 Comment(s)</p></div>
+			
 				</div>
 			</Link>
 		</div>

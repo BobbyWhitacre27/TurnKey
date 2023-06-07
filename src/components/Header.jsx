@@ -20,7 +20,9 @@ const Header = ({ user, setUser, setToken, token }) => {
 				<div
 					class="mx-auto flex sm:grid sm:grid-cols-3 h-16 max-w-screen-xl place-items-center px-4"
 				>
-			
+					<span class="flex w-0 flex-1 lg:hidden">
+
+					</span>
 
 					<div class="flex items-center gap-4">
 						<Link to="/">
@@ -33,10 +35,6 @@ const Header = ({ user, setUser, setToken, token }) => {
 					</div>
 
 					<div class="flex w-0 flex-1 justify-end lg:hidden">
-
-					<Link to="/Profile" >
-
-
 					<button class="rounded-full bg-gray-100 p-2 text-gray-600" type="button">
 							<span class="sr-only">Account</span>
 							<svg
@@ -55,7 +53,7 @@ const Header = ({ user, setUser, setToken, token }) => {
 								></path>
 							</svg>
 						</button>
-						</Link>
+
 
 						{/* <button class="rounded-full bg-gray-100 p-2 text-gray-500" type="button">
 							<span class="sr-only">Menu</span>

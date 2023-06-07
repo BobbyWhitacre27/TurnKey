@@ -133,3 +133,107 @@ export async function getPhotosByPostId(postId) {
         console.error(err);
     }
 }
+
+export async function deletePost(id) {
+
+    try {
+        const res = await fetch(`${APIURL}/posting/${id}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+        const json = res.json();
+        return json;
+    } catch (err) {
+        console.error(err);
+    }
+}
+
+export async function deletePhoto(id) {
+
+    try {
+        const res = await fetch(`${APIURL}/photos/${id}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+        const json = res.json();
+        return json;
+    } catch (err) {
+        console.error(err);
+    }
+}
+
+export async function updateTitle(
+    id,
+    title
+) {
+    try {
+
+        const res = await fetch(`${APIURL}/posting/${id}/updatetitle`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                title: title,
+            }),
+        });
+
+        const json = res.json();
+
+        return json;
+    } catch (err) {
+        console.error(err);
+    }
+}
+
+export async function updatePrice(
+    id,
+    price
+) {
+    try {
+
+        const res = await fetch(`${APIURL}/posting/${id}/updateprice`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                price: price,
+            }),
+        });
+
+        const json = res.json();
+
+        return json;
+    } catch (err) {
+        console.error(err);
+    }
+}
+
+export async function updateDescription(
+    id,
+    description
+) {
+    try {
+
+        const res = await fetch(`${APIURL}/posting/${id}/updatedescription`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                description: description,
+            }),
+        });
+
+        const json = res.json();
+
+        return json;
+    } catch (err) {
+        console.error(err);
+    }
+}

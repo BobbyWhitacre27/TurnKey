@@ -1,19 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-import { addPhoto, getAllPhotos } from "../api";
+import { addPhoto, deletePhoto } from "../api";
 
 
-const Post_photos = ({ allPostings, user, setRefresh, allPhotos, setAllPhotos }) => {
+const Post_photos = ({ allPostings, user, setRefresh, allPhotos }) => {
 	const navigate = useNavigate();
 	const [imageURL, setImageURL] = useState('');
-	const [addedImages, setAddedImages] = useState([])
-	const [addingPhoto, setAddingPhoto] = useState(false);
-	
-	const photos = async () => {
-		const allPhotos = await getAllPhotos();
-		setAllPhotos(allPhotos)
-	}
+
 
 	const userId = user.id
 
@@ -25,22 +19,27 @@ const Post_photos = ({ allPostings, user, setRefresh, allPhotos, setAllPhotos })
 
 	const postPhotos = allPhotos.filter((f) => lastUserPostId === f.postId)
 
-	const photosOfPosting = postPhotos.map((f) => f.photo)
+	const photosOfPosting = postPhotos.map((f) => {
+		return <div class="relative">
+			<img class="m-auto h-64 rounded-xl mb-2" src={f.photo}></img>
+			<button onClick={() => handleDeletePhoto(f.id)} >
+				<img class="absolute top-4 right-4 h-6" src="https://pixy.org/src/439/4393715.png"></img>
+			</button>
+		</div>
+	})
 
 	const handleAdd = async (event) => {
 		event.preventDefault();
-
-		console.log(lastUserPostId, imageURL)
+		setRefresh(true)
 		await addPhoto(lastUserPostId, imageURL)
-		setAddedImages(imageURL)
-		setAddingPhoto(true)
-		setAddingPhoto(false)
-		navigate("/Profile")
+		setRefresh(false)
 	}
 
-	useEffect(() => {
-		photos()
-	}, [addingPhoto])
+	const handleDeletePhoto = async (id) => {
+		setRefresh(true)
+		await deletePhoto(id)
+		setRefresh(false)
+	}
 
 	return (
 		<section>
@@ -66,9 +65,10 @@ const Post_photos = ({ allPostings, user, setRefresh, allPhotos, setAllPhotos })
 
 					<div class="rounded-lg bg-white p-8 shadow-lg sm:w-1/2 m-auto lg:col-span-3 lg:p-12">
 						<h1 class="mb-8 text-3xl font-bold">Add Photo</h1>
-						<form action="" class="space-y-4">
+						{photosOfPosting}
+						<form action="" class="space-y-4 mt-4">
 
-					
+
 
 							<div class="grid grid-cols-1 gap-4 sm:grid-cols-1">
 								<div>
@@ -82,14 +82,14 @@ const Post_photos = ({ allPostings, user, setRefresh, allPhotos, setAllPhotos })
 									/>
 								</div>
 
-								{/* <div class="">
+								<div class="">
 									<button
 										onClick={handleAdd}
 										class="inline-block w-full rounded-lg bg-gray-200 px-5 py-3 font-medium  sm:w-auto"
 									>
 										Add
 									</button>
-								</div> */}
+								</div>
 
 
 							</div>
@@ -106,8 +106,8 @@ const Post_photos = ({ allPostings, user, setRefresh, allPhotos, setAllPhotos })
 
 							<div class="mt-4">
 								<button
-								
-									onClick={handleAdd}
+
+									onClick={() => navigate("/Profile")}
 									class="inline-block w-full rounded-lg bg-black px-5 py-3 font-medium text-white sm:w-auto"
 								>
 									Complete Posting
