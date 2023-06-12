@@ -23,8 +23,8 @@ async function createComment({
 async function getAllCommentsByPostId(id) {
     const { rows: comments } = await client.query(`
     SELECT * FROM comments
-	WHERE "postId"=${id};
-    `);
+	WHERE "postId"=$1;
+    `, [id]);
 
     return comments;
 }

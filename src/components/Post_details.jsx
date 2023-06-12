@@ -1,11 +1,24 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { getPostingsById, getPhotosByPostId, deletePost, deletePhoto, addPhoto, updateTitle, updatePrice, updateDescription } from "../api";
+import { 
+	getPostingsById, 
+	getPhotosByPostId, 
+	deletePost, 
+	deletePhoto, 
+	addPhoto, 
+	updateTitle, 
+	updatePrice, 
+	updateDescription, 
+	addComment, 
+	getCommentsByPostId, 
+	deleteComment } from "../api";
 
 const Post_details = ({ selectedPost, user, setRefresh, refresh }) => {
 	const [postingDetails, setPostingDetails] = useState([])
 	const [postingPhotos, setPostingPhotos] = useState([])
+	const [postingComments, setPostingComments] = useState([])
 	const [postingRefresh, setPostingRefresh] = useState(false)
+	const [comment, setComment] = useState('');
 	const [imageURL, setImageURL] = useState('');
 
 	const [newTitle, setNewTitle] = useState('');
@@ -19,17 +32,25 @@ const Post_details = ({ selectedPost, user, setRefresh, refresh }) => {
 
 	const navigate = useNavigate();
 
+	// Fetches the post
 	const posting = async () => {
 		const posting = await getPostingsById(selectedPost);
 		setPostingDetails(posting)
 	}
 
+	// Fetches the photos for the selected post
 	const photos = async () => {
 		const photos = await getPhotosByPostId(selectedPost);
 		setPostingPhotos(photos)
 	}
 
+	// Fetches the comments for the selected post
+	const comments = async () => {
+		const comments = await getCommentsByPostId(selectedPost);
+		setPostingComments(comments)
+	}
 
+	// Adds a photo for a post
 	const handleAddPhoto = async () => {
 		setPostingRefresh(true)
 		setRefresh(true)
@@ -38,6 +59,16 @@ const Post_details = ({ selectedPost, user, setRefresh, refresh }) => {
 		setRefresh(false)
 	}
 
+	// Adds a comment for a post
+	const handleAddComment = async () => {
+		setPostingRefresh(true)
+		setRefresh(true)
+		await addComment(userId, selectedPost, comment)
+		setPostingRefresh(false)
+		setRefresh(false)
+	}
+
+	// Deletes the post
 	const handleDeletePost = async () => {
 		setRefresh(true)
 		if (postingPhotos.length > 0) {
@@ -50,6 +81,7 @@ const Post_details = ({ selectedPost, user, setRefresh, refresh }) => {
 		window.alert("Post successfully deleted!")
 	}
 
+	// Deletes photos for the selected post
 	const handleDeletePhoto = async (id) => {
 		setPostingRefresh(true)
 		setRefresh(true)
@@ -58,6 +90,7 @@ const Post_details = ({ selectedPost, user, setRefresh, refresh }) => {
 		setRefresh(false)
 	}
 
+	// Updates the title
 	const handleUpdateTitle = async (id, title) => {
 		setPostingRefresh(true)
 		setRefresh(true)
@@ -67,13 +100,7 @@ const Post_details = ({ selectedPost, user, setRefresh, refresh }) => {
 
 	}
 
-	const handleDisplayUpdateTitle = () => {
-		if (editTitle === false) {
-			return setEditTitle(true)
-		}
-		return setEditTitle(false)
-	}
-
+	// Updates the price
 	const handleUpdatePrice = async (id, title) => {
 		setPostingRefresh(true)
 		setRefresh(true)
@@ -82,13 +109,7 @@ const Post_details = ({ selectedPost, user, setRefresh, refresh }) => {
 		setRefresh(false)
 	}
 
-	const handleDisplayUpdatePrice = () => {
-		if (editPrice === false) {
-			return setEditPrice(true)
-		}
-		return setEditPrice(false)
-	}
-
+	// Updates the description
 	const handleUpdateDescription = async (id, title) => {
 		setPostingRefresh(true)
 		setRefresh(true)
@@ -97,7 +118,24 @@ const Post_details = ({ selectedPost, user, setRefresh, refresh }) => {
 		setRefresh(false)
 	}
 
-	const handleDisplayUpdateDescription = () => {
+	// Allows edit title box to display
+	const handleShowUpdateTitleBox = () => {
+		if (editTitle === false) {
+			return setEditTitle(true)
+		}
+		return setEditTitle(false)
+	}
+
+	// Allows edit price box to display
+	const handleShowUpdatePriceBox = () => {
+		if (editPrice === false) {
+			return setEditPrice(true)
+		}
+		return setEditPrice(false)
+	}
+
+	// Allows edit description box to display
+	const handleShowUpdateDescriptionBox = () => {
 		if (editDescription === false) {
 			return setEditDescription(true)
 		}
@@ -107,8 +145,10 @@ const Post_details = ({ selectedPost, user, setRefresh, refresh }) => {
 	useEffect(() => {
 		posting()
 		photos()
+		comments()
 	}, [postingRefresh, refresh])
 
+	// Variables used
 	const id = postingDetails.id
 	const price = (postingDetails.price)
 	const photo1 = postingPhotos[0]?.photo
@@ -119,12 +159,13 @@ const Post_details = ({ selectedPost, user, setRefresh, refresh }) => {
 	const date = (postingDetails.date)
 	const daysAgo = new Date() - date
 
+	// User variables used
 	const postUserId = postingDetails.userId
-	const username = user.username
 	const userId = user.id
 	const userAdmin = user.isadmin
 
-	const editTitleDisplay =
+	// Boxes that pop up to edit components
+	const editTitleBox =
 		<div class="grid">
 			<label
 				for="UserEmail"
@@ -153,7 +194,7 @@ const Post_details = ({ selectedPost, user, setRefresh, refresh }) => {
 			</button>
 		</div>
 
-	const editPriceDisplay =
+	const editPriceBox =
 		<div class="grid">
 			<label
 				for="UserEmail"
@@ -182,7 +223,7 @@ const Post_details = ({ selectedPost, user, setRefresh, refresh }) => {
 			</button>
 		</div>
 
-	const editDescriptionDisplay =
+	const editDescriptionBox =
 		<div class="grid">
 			<label
 				for="UserEmail"
@@ -211,6 +252,7 @@ const Post_details = ({ selectedPost, user, setRefresh, refresh }) => {
 			</button>
 		</div>
 
+	// The component to display the 1st photo
 	const photo1Display = postingPhotos.map((p) => {
 		return <div>
 			{photo1 === p.photo ? <div class="relative"><img
@@ -239,6 +281,11 @@ const Post_details = ({ selectedPost, user, setRefresh, refresh }) => {
 					</div>}
 			</div>
 		</div>
+	})
+
+	// The component to display comments
+	const commentDipsplay = postingComments.map((p) => {
+		return <div class="py-2">{p.comment}</div>
 	})
 
 
@@ -300,26 +347,26 @@ const Post_details = ({ selectedPost, user, setRefresh, refresh }) => {
 							<div class="max-w-[35ch] space-y-2">
 
 								{userId === postUserId || userAdmin ?
-									<button onClick={handleDisplayUpdateTitle} class="text-xl font-bold sm:text-2xl">
+									<button onClick={handleShowUpdateTitleBox} class="text-xl font-bold sm:text-2xl">
 										{title}
 									</button> :
 									<h1 class="text-xl font-bold sm:text-2xl">
 										{title}
 									</h1>}
 
-								{editTitle ? editTitleDisplay : ""}
+								{editTitle ? editTitleBox : ""}
 
 
 							</div>
 							{userId === postUserId || userAdmin ?
-								<button onClick={handleDisplayUpdatePrice} class="text-lg font-bold">
+								<button onClick={handleShowUpdatePriceBox} class="text-lg font-bold">
 									${price}
 								</button> :
 								<h1 class="text-lg font-bold">
 									${price}
 								</h1>}
 
-							{editPrice ? editPriceDisplay : ""}
+							{editPrice ? editPriceBox : ""}
 
 						</div>
 
@@ -327,14 +374,14 @@ const Post_details = ({ selectedPost, user, setRefresh, refresh }) => {
 							<div class="prose max-w-none text-left">
 
 								{userId === postUserId || userAdmin ?
-									<button onClick={handleDisplayUpdateDescription} class="text-left">
+									<button onClick={handleShowUpdateDescriptionBox} class="text-left">
 										{description}
 									</button> :
 									<p class="text-left">
 										{description}
 									</p>}
 
-								{editDescription ? editDescriptionDisplay : ""}
+								{editDescription ? editDescriptionBox : ""}
 
 
 								<p class="mt-2 text-gray-400 text-sm italic">
@@ -349,7 +396,7 @@ const Post_details = ({ selectedPost, user, setRefresh, refresh }) => {
 						<div class="mt-6 mb-2 text-left">Comments</div>
 						<hr class="h-px my-2 bg-gray-700 dark:bg-gray-700"></hr>
 
-						<p class="text-sm text-left text-gray-500 mb-2">No comments.</p>
+						<p class="text-sm text-left text-gray-500 mb-2">{commentDipsplay.length > 0 ? commentDipsplay : "No comments"}</p>
 
 
 						{userId || userAdmin ?
@@ -359,9 +406,9 @@ const Post_details = ({ selectedPost, user, setRefresh, refresh }) => {
 									class="relative block overflow-hidden rounded-md border border-gray-200 px-3 pt-3 shadow-sm focus-within:border-blue-600 focus-within:ring-1 focus-within:ring-blue-600"
 								>
 									<input
-										type=""
 										id="UserEmail"
-										placeholder="Email"
+										placeholder="Comment"
+										onChange={(e) => setComment(e.target.value)}
 										class="peer h-8 w-full border-none bg-transparent p-0 placeholder-transparent focus:border-transparent focus:outline-none focus:ring-0 sm:text-sm"
 									/>
 
@@ -373,7 +420,7 @@ const Post_details = ({ selectedPost, user, setRefresh, refresh }) => {
 								</label>
 
 								<button
-									type="submit"
+									onClick={handleAddComment}
 									class="block rounded bg-green-600 px-5 py-3 text-xs font-medium text-white hover:bg-green-500 mt-2"
 								>
 									Add Comment

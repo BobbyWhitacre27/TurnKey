@@ -237,3 +237,52 @@ export async function updateDescription(
         console.error(err);
     }
 }
+
+export async function addComment(
+	userId, postId, comment
+) {
+    try {
+        const res = await fetch(`${APIURL}/comments`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+				userId: userId,
+				postId: postId, 
+				comment: comment
+            }),
+        });
+        const json = res.json();
+        return json;
+    } catch (err) {
+        console.error(err);
+    }
+}
+
+export async function deleteComment(id) {
+
+    try {
+        const res = await fetch(`${APIURL}/comments/${id}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+        const json = res.json();
+        return json;
+    } catch (err) {
+        console.error(err);
+    }
+}
+
+export async function getCommentsByPostId(postId) {
+
+    try {
+        const res = await fetch(`${APIURL}/comments/${postId}`);
+        const json = await res.json();
+        return json;
+    } catch (err) {
+        console.error(err);
+    }
+}
