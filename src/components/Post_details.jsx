@@ -160,14 +160,19 @@ const Post_details = ({ selectedPost, user, setRefresh, refresh }) => {
 
 	// Variables used
 	const id = postingDetails.id
-	const price = (postingDetails.price)
+	const price = postingDetails.price?.toLocaleString('en-US', {
+		style: 'currency',
+		currency: 'USD',
+	})
 	const photo1 = postingPhotos[0]?.photo
 	const photoNotFound = <img class="aspect-square w-full rounded-xl object-cover" src="https://static.vecteezy.com/system/resources/previews/005/337/799/original/icon-image-not-found-free-vector.jpg"></img>
 	const type = postingDetails.type
 	const title = postingDetails.title
 	const description = postingDetails.description
-	const date = (postingDetails.date)
-	const daysAgo = new Date() - date
+	const date = new Date(postingDetails.date?.replace(/-/g, '\/').replace(/T.+/, ''))
+	const currentDate = new Date ()
+	const difference  = currentDate - date
+	const daysAgo = Math.ceil(difference / (1000 * 60 * 60 * 24))
 
 	// User variables used
 	const postUserId = postingDetails.userId
@@ -349,7 +354,7 @@ const Post_details = ({ selectedPost, user, setRefresh, refresh }) => {
 							>
 								To {type}
 							</strong>
-							{/* {date} */}
+							{daysAgo <= 1 ? "Today" : <div>{daysAgo} days ago</div>}
 						</div>
 
 
@@ -370,10 +375,10 @@ const Post_details = ({ selectedPost, user, setRefresh, refresh }) => {
 							</div>
 							{userId === postUserId || userAdmin ?
 								<button onClick={handleShowUpdatePriceBox} class="text-lg font-bold">
-									${price}
+									{price}
 								</button> :
 								<h1 class="text-lg font-bold">
-									${price}
+									{price}
 								</h1>}
 
 							{editPrice ? editPriceBox : ""}
@@ -406,8 +411,8 @@ const Post_details = ({ selectedPost, user, setRefresh, refresh }) => {
 						<div class="mt-6 mb-2 text-left">Comments</div>
 						<hr class="h-px my-2 bg-gray-700 dark:bg-gray-700"></hr>
 
-						<p class="text-sm text-left text-gray-500 mb-2">{commentDipsplay.length > 0 ? commentDipsplay : "No comments"}</p>
-
+						<p class="text-sm text-left text-gray-500 mb-2 px-2 py-2 rounded-xl italic bg-gray-100">{commentDipsplay.length > 0 ? commentDipsplay : "No comments"}</p>
+						{!userId || !userAdmin ? <div class="text-sm text-left text-gray-500">Want to add a comment? Please <Link to="/Login" class="underline text-blue-800">log in</Link>.</div> : ""}
 
 						{userId || userAdmin ?
 							<div class="gap-4">
@@ -438,16 +443,16 @@ const Post_details = ({ selectedPost, user, setRefresh, refresh }) => {
 							</div>
 							: ""}
 
-						{userId === postUserId || userAdmin ?
+						{userId !== postUserId && !userAdmin ?
 
+							""
 
-
-							<button
+							: <button
 								onClick={handleDeletePost}
 								class="block m-auto rounded px-5 py-3 text-xs border-1 font-medium text-black hover:bg-red-500 mt-2"
 							>
 								Delete Post
-							</button> : ""
+							</button>
 						}
 
 					</div>

@@ -3,20 +3,36 @@ import { Link, useNavigate } from "react-router-dom";
 
 const Header = ({ user, setUser, setToken, token }) => {
 	const navigate = useNavigate();
-
+	const [isNavOpen, setIsNavOpen] = useState(false);
 
 	const logout = () => {
         localStorage.removeItem('token');
         setToken('');
         setUser('');
+		setIsNavOpen(false)
         navigate('/');
     }
+
+
+
+	const navMobleBox = 
+	<div class="absolute bg-gray-400 top-0 left-0 w-full h-36 text-white font-bold text-3xl text-left pl-6 underline">
+		<button onClick={() => setIsNavOpen(false)}><img class="h-10 absolute right-6" src="https://cdn0.iconfinder.com/data/icons/controls-add-on/48/v-41-1024.png"></img></button>
+		{token === "" ? <div onClick={() => setIsNavOpen(false)}><Link to="/Login">Log in</Link></div> : ""}
+		{token === "" ? <div onClick={() => setIsNavOpen(false)}><Link to="/Signup">Sign in</Link></div> : ""}
+		{token === "" ? "" : <div class="mt-4" onClick={logout}><Link to="/">Logout</Link></div>}
+		</div>
 
 	return (
 		<header>
 
 
 			<header aria-label="Site Header" class="shadow-sm">
+
+
+				{isNavOpen ? navMobleBox : ""}
+
+
 				<div
 					class="mx-auto flex sm:grid sm:grid-cols-3 h-16 max-w-screen-xl place-items-center px-4"
 				>
@@ -35,7 +51,7 @@ const Header = ({ user, setUser, setToken, token }) => {
 					</div>
 
 					<div class="flex w-0 flex-1 justify-end lg:hidden">
-					<button class="rounded-full bg-gray-100 p-2 text-gray-600" type="button">
+					<button class="rounded-full bg-gray-100 p-2 text-gray-600" type="button" onClick={() => setIsNavOpen(true)}>
 							<span class="sr-only">Account</span>
 							<svg
 								class="h-5 w-5"

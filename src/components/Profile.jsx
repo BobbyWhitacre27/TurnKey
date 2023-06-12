@@ -14,6 +14,12 @@ const Profile = ({ allPostings, user, setSelectedPost, allPhotos }) => {
 
 		const date = new Date(p.date.replace(/-/g, '\/').replace(/T.+/, ''))
 
+		const currentDate = new Date ()
+
+		const difference  = currentDate - date
+
+		const daysAgo = Math.ceil(difference / (1000 * 60 * 60 * 24))
+
 		const price = p.price.toLocaleString('en-US', {
 			style: 'currency',
 			currency: 'USD',
@@ -33,7 +39,7 @@ const Profile = ({ allPostings, user, setSelectedPost, allPhotos }) => {
 						src={photos ? photos : imageNotFound}
 						class="h-56 w-full object-cover brightness-100"
 					/>
-					<div class="absolute top-2 right-2 bg-black px-3 rounded-lg font-bold text-white bg-opacity-75">{date.toLocaleDateString('en-US')}</div>
+					<div class="absolute top-2 right-2 bg-black px-3 rounded-lg font-bold text-white bg-opacity-75">{daysAgo <= 1 ? "Today" : <div>{daysAgo} days ago</div>}</div>
 					{user.id === p.userId ? <div class="absolute top-2 left-2 bg-red-600 px-3 rounded-lg font-bold text-white bg-opacity-75">My Post</div> : ""}
 				</div>
 				<div class="px-4 py-2">
