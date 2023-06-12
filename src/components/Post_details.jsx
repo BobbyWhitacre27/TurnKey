@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { getPostingsById, getPhotosByPostId, deletePost, deletePhoto, addPhoto, updateTitle } from "../api";
+import { getPostingsById, getPhotosByPostId, deletePost, deletePhoto, addPhoto, updateTitle, updatePrice, updateDescription } from "../api";
 
-const Post_details = ({ selectedPost, setSelectedPost, allPostings, allPhotos, allComments, user, setRefresh, refresh }) => {
+const Post_details = ({ selectedPost, user, setRefresh, refresh }) => {
 	const [postingDetails, setPostingDetails] = useState([])
 	const [postingPhotos, setPostingPhotos] = useState([])
 	const [postingRefresh, setPostingRefresh] = useState(false)
@@ -74,6 +74,36 @@ const Post_details = ({ selectedPost, setSelectedPost, allPostings, allPhotos, a
 		return setEditTitle(false)
 	}
 
+	const handleUpdatePrice = async (id, title) => {
+		setPostingRefresh(true)
+		setRefresh(true)
+		await updatePrice(selectedPost, newPrice)
+		setPostingRefresh(false)
+		setRefresh(false)
+	}
+
+	const handleDisplayUpdatePrice = () => {
+		if (editPrice === false) {
+			return setEditPrice(true)
+		}
+		return setEditPrice(false)
+	}
+
+	const handleUpdateDescription = async (id, title) => {
+		setPostingRefresh(true)
+		setRefresh(true)
+		await updateDescription(selectedPost, newDescription)
+		setPostingRefresh(false)
+		setRefresh(false)
+	}
+
+	const handleDisplayUpdateDescription = () => {
+		if (editDescription === false) {
+			return setEditDescription(true)
+		}
+		return setEditDescription(false)
+	}
+
 	useEffect(() => {
 		posting()
 		photos()
@@ -117,6 +147,64 @@ const Post_details = ({ selectedPost, setSelectedPost, allPostings, allPhotos, a
 
 			<button
 				onClick={handleUpdateTitle}
+				class="block rounded bg-green-600 px-5 py-3 text-xs font-medium text-white hover:bg-green-500 mt-2"
+			>
+				Update
+			</button>
+		</div>
+
+	const editPriceDisplay =
+		<div class="grid">
+			<label
+				for="UserEmail"
+				class="relative block overflow-hidden rounded-md border border-gray-200 px-3 pt-3 shadow-sm focus-within:border-blue-600 focus-within:ring-1 focus-within:ring-blue-600"
+			>
+				<input
+					type="text"
+					id="UserEmail"
+					placeholder="Edit Price"
+					onChange={(e) => setNewPrice(e.target.value)}
+					class="peer h-8 w-full border-none bg-transparent p-0 placeholder-transparent focus:border-transparent focus:outline-none focus:ring-0 sm:text-sm"
+				/>
+
+				<span
+					class="absolute start-3 top-3 -translate-y-1/2 text-xs text-gray-400 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-3 peer-focus:text-xs"
+				>
+					Edit Price
+				</span>
+			</label>
+
+			<button
+				onClick={handleUpdatePrice}
+				class="block rounded bg-green-600 px-5 py-3 text-xs font-medium text-white hover:bg-green-500 mt-2"
+			>
+				Update
+			</button>
+		</div>
+
+	const editDescriptionDisplay =
+		<div class="grid">
+			<label
+				for="UserEmail"
+				class="relative block overflow-hidden rounded-md border border-gray-200 px-3 pt-3 shadow-sm focus-within:border-blue-600 focus-within:ring-1 focus-within:ring-blue-600"
+			>
+				<input
+					type="text"
+					id="UserEmail"
+					placeholder="Edit Price"
+					onChange={(e) => setNewDescription(e.target.value)}
+					class="peer h-8 w-full border-none bg-transparent p-0 placeholder-transparent focus:border-transparent focus:outline-none focus:ring-0 sm:text-sm"
+				/>
+
+				<span
+					class="absolute start-3 top-3 -translate-y-1/2 text-xs text-gray-400 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-3 peer-focus:text-xs"
+				>
+					Edit Description
+				</span>
+			</label>
+
+			<button
+				onClick={handleUpdateDescription}
 				class="block rounded bg-green-600 px-5 py-3 text-xs font-medium text-white hover:bg-green-500 mt-2"
 			>
 				Update
@@ -223,15 +311,32 @@ const Post_details = ({ selectedPost, setSelectedPost, allPostings, allPhotos, a
 
 
 							</div>
+							{userId === postUserId || userAdmin ?
+								<button onClick={handleDisplayUpdatePrice} class="text-lg font-bold">
+									${price}
+								</button> :
+								<h1 class="text-lg font-bold">
+									${price}
+								</h1>}
 
-							<p class="text-lg font-bold">${price}</p>
+							{editPrice ? editPriceDisplay : ""}
+
 						</div>
 
 						<div class="mt-4">
 							<div class="prose max-w-none text-left">
-								<p>
-									{description}
-								</p>
+
+								{userId === postUserId || userAdmin ?
+									<button onClick={handleDisplayUpdateDescription} class="text-left">
+										{description}
+									</button> :
+									<p class="text-left">
+										{description}
+									</p>}
+
+								{editDescription ? editDescriptionDisplay : ""}
+
+
 								<p class="mt-2 text-gray-400 text-sm italic">
 									{/* Posted by: {username} */}
 								</p>
@@ -282,11 +387,11 @@ const Post_details = ({ selectedPost, setSelectedPost, allPostings, allPhotos, a
 
 							<button
 								onClick={handleDeletePost}
-								class="block m-auto rounded bg-red-600 px-5 py-3 text-xs font-medium text-white hover:bg-red-500 mt-2"
+								class="block m-auto rounded px-5 py-3 text-xs border-1 font-medium text-black hover:bg-red-500 mt-2"
 							>
 								Delete Post
-							</button>
-							: ""}
+							</button> : ""
+						}
 
 					</div>
 
