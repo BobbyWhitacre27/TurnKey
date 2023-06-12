@@ -1,17 +1,18 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { 
-	getPostingsById, 
-	getPhotosByPostId, 
-	deletePost, 
-	deletePhoto, 
-	addPhoto, 
-	updateTitle, 
-	updatePrice, 
-	updateDescription, 
-	addComment, 
-	getCommentsByPostId, 
-	deleteComment } from "../api";
+import {
+	getPostingsById,
+	getPhotosByPostId,
+	deletePost,
+	deletePhoto,
+	addPhoto,
+	updateTitle,
+	updatePrice,
+	updateDescription,
+	addComment,
+	getCommentsByPostId,
+	deleteComment
+} from "../api";
 
 const Post_details = ({ selectedPost, user, setRefresh, refresh }) => {
 	const [postingDetails, setPostingDetails] = useState([])
@@ -86,6 +87,15 @@ const Post_details = ({ selectedPost, user, setRefresh, refresh }) => {
 		setPostingRefresh(true)
 		setRefresh(true)
 		await deletePhoto(id)
+		setPostingRefresh(false)
+		setRefresh(false)
+	}
+
+	// Deletes comments for the selected post
+	const handleDeleteComment = async (id) => {
+		setPostingRefresh(true)
+		setRefresh(true)
+		await deleteComment(id)
 		setPostingRefresh(false)
 		setRefresh(false)
 	}
@@ -285,7 +295,7 @@ const Post_details = ({ selectedPost, user, setRefresh, refresh }) => {
 
 	// The component to display comments
 	const commentDipsplay = postingComments.map((p) => {
-		return <div class="py-2">{p.comment}</div>
+		return <div class="flex py-2">{p.comment} {userId === p.userId || userAdmin ? <button onClick={() => handleDeleteComment(p.id)}><img class="h-5 pt-0 pl-1" src="https://cdn0.iconfinder.com/data/icons/controls-add-on/48/v-41-512.png"></img></button> : ""}</div>
 	})
 
 
