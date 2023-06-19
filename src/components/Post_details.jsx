@@ -181,7 +181,7 @@ const Post_details = ({ selectedPost, user, setRefresh, refresh }) => {
 
 	// Boxes that pop up to edit components
 	const editTitleBox =
-		<div class="grid">
+		<div class="grid mt-2">
 			<label
 				for="UserEmail"
 				class="relative block overflow-hidden rounded-md border border-gray-200 px-3 pt-3 shadow-sm focus-within:border-blue-600 focus-within:ring-1 focus-within:ring-blue-600"
@@ -210,7 +210,7 @@ const Post_details = ({ selectedPost, user, setRefresh, refresh }) => {
 		</div>
 
 	const editPriceBox =
-		<div class="grid">
+		<div class="grid mt-2">
 			<label
 				for="UserEmail"
 				class="relative block overflow-hidden rounded-md border border-gray-200 px-3 pt-3 shadow-sm focus-within:border-blue-600 focus-within:ring-1 focus-within:ring-blue-600"
@@ -239,7 +239,7 @@ const Post_details = ({ selectedPost, user, setRefresh, refresh }) => {
 		</div>
 
 	const editDescriptionBox =
-		<div class="grid">
+		<div class="grid mt-2">
 			<label
 				for="UserEmail"
 				class="relative block overflow-hidden rounded-md border border-gray-200 px-3 pt-3 shadow-sm focus-within:border-blue-600 focus-within:ring-1 focus-within:ring-blue-600"
@@ -276,7 +276,7 @@ const Post_details = ({ selectedPost, user, setRefresh, refresh }) => {
 				class="aspect-square w-full rounded-xl object-cover"
 			/>
 				{userId === postUserId || userAdmin ? <button onClick={() => handleDeletePhoto(p.id)}>
-					<img class="absolute top-4 right-4 h-6" src="https://pixy.org/src/439/4393715.png">
+					<img class="absolute top-4 right-4 h-6" src="https://cdn0.iconfinder.com/data/icons/controls-add-on/48/v-41-512.png">
 					</img>
 				</button> : ""}
 			</div> : ""}
@@ -290,7 +290,7 @@ const Post_details = ({ selectedPost, user, setRefresh, refresh }) => {
 							class="aspect-square w-full rounded-xl object-cover"
 						/>
 						{userId === postUserId || userAdmin ? <button onClick={() => handleDeletePhoto(p.id)}>
-							<img class="absolute top-4 right-4 h-6" src="https://pixy.org/src/439/4393715.png">
+							<img class="absolute top-4 right-4 h-6" src="https://cdn0.iconfinder.com/data/icons/controls-add-on/48/v-41-512.png">
 							</img>
 						</button> : ""}
 					</div>}
@@ -362,28 +362,32 @@ const Post_details = ({ selectedPost, user, setRefresh, refresh }) => {
 							<div class="max-w-[35ch] space-y-2">
 
 								{userId === postUserId || userAdmin ?
-									<button onClick={handleShowUpdateTitleBox} class="text-xl font-bold sm:text-2xl">
+									<button onClick={handleShowUpdateTitleBox} class="text-xl text-left font-bold sm:text-2xl">
 										{title}
 									</button> :
-									<h1 class="text-xl font-bold sm:text-2xl">
+									<h1 class="text-xl text-left font-bold sm:text-2xl">
 										{title}
 									</h1>}
 
-								{editTitle ? editTitleBox : ""}
+								
 
 
 							</div>
 							{userId === postUserId || userAdmin ?
 								<button onClick={handleShowUpdatePriceBox} class="text-lg font-bold">
-									{price}
+									{type === "rent" ? <div>{price}/mo</div> : price} 
 								</button> :
 								<h1 class="text-lg font-bold">
-									{price}
+									{type === "rent" ? <div>{price}/mo</div> : price} 
 								</h1>}
 
-							{editPrice ? editPriceBox : ""}
+							
 
 						</div>
+
+						{editTitle ? editTitleBox : ""}
+
+						{editPrice ? editPriceBox : ""}
 
 						<div class="mt-4">
 							<div class="prose max-w-none text-left">
@@ -412,7 +416,7 @@ const Post_details = ({ selectedPost, user, setRefresh, refresh }) => {
 						<hr class="h-px my-2 bg-gray-700 dark:bg-gray-700"></hr>
 
 						<p class="text-sm text-left text-gray-500 mb-2 px-2 py-2 rounded-xl italic bg-gray-100">{commentDipsplay.length > 0 ? commentDipsplay : "No comments"}</p>
-						{!userId || !userAdmin ? <div class="text-sm text-left text-gray-500">Want to add a comment? Please <Link to="/Login" class="underline text-blue-800">log in</Link>.</div> : ""}
+						{!userId ? <div class="text-sm text-left text-gray-500">Want to add a comment? Please <Link to="/Login" class="underline text-blue-800">log in</Link>.</div> : ""}
 
 						{userId || userAdmin ?
 							<div class="gap-4">
