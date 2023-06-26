@@ -4,9 +4,9 @@ import { } from "../api";
 
 const Buy = ({ allPostings, allPhotos, setSelectedPost, user }) => {
 
-	const buyPosts = allPostings.filter((p) => p.type === "buy")
+	const buyPosts = allPostings?.filter((p) => p.type === "buy")
 
-	const postPreview = buyPosts.map((p) => {
+	const postPreview = buyPosts?.map((p) => {
 
 		const date = new Date(p.date.replace(/-/g, '\/').replace(/T.+/, ''))
 
@@ -21,14 +21,14 @@ const Buy = ({ allPostings, allPhotos, setSelectedPost, user }) => {
 			currency: 'USD',
 		})
 
-		const postPhotos = allPhotos.filter((f) => p.id === f.postId)
+		const postPhotos = allPhotos?.filter((f) => p?.id === f?.postId)
 
-		const photos = postPhotos.map((f) => f.photo)[0]
+		const photos = postPhotos?.map((f) => f?.photo)[0]
 
 		const imageNotFound = "https://static.vecteezy.com/system/resources/previews/005/337/799/original/icon-image-not-found-free-vector.jpg"
 
 		return <div class="overflow-hidden rounded-lg shadow transition m-4">
-			<Link class="hover:text-black"  onClick={() => setSelectedPost(p.id)} to="/Post_details">
+			<Link class="hover:text-black"  onClick={() => setSelectedPost(p?.id)} to="/Post_details">
 				<div class="relative">
 					<img
 						alt="House"

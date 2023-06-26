@@ -1,4 +1,6 @@
-export const APIURL = `http://localhost:4000/api`;
+// export const APIURL = `http://localhost:4000/api`;
+
+export const APIURL = `https://turnkey.onrender.com/api`;
 
 export const register = async (username, password) => {
 
