@@ -76,6 +76,10 @@ const Post_details = ({ selectedPost, user, setRefresh, refresh }) => {
 			window.alert("Please delete all photos first.")
 			return
 		}
+		if (postingComments.length > 0) {
+			window.alert("Please delete all comments first.")
+			return
+		}
 		await deletePost(selectedPost)
 		setRefresh(false)
 		navigate(-1)
