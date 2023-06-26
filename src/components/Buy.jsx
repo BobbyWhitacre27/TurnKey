@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { } from "../api";
 
-const Buy = ({ allPostings, allPhotos, setSelectedPost, user }) => {
+const Buy = ({ allPostings, allPhotos, setSelectedPost, user, isLoading, loading }) => {
 
 	const buyPosts = allPostings?.filter((p) => p.type === "buy")
 
@@ -75,7 +75,7 @@ const Buy = ({ allPostings, allPhotos, setSelectedPost, user }) => {
 			</section>
 
 			<div class="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 p-2">
-				{postPreview}
+				{isLoading ? loading() : postPreview}
 			</div>
 
 		</section>
