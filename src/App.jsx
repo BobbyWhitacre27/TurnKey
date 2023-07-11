@@ -27,13 +27,17 @@ function App() {
 	const [isLoading, setIsLoading] = useState(false);
 
 	const postings = async () => {
+		setIsLoading(true)
 		const allPosts = await getAllPostings();
 		setAllPostings(allPosts)
+		setIsLoading(false)
 	}
 
 	const photos = async () => {
+		setIsLoading(true)
 		const allPhotos = await getAllPhotos();
 		setAllPhotos(allPhotos)
+		setIsLoading(false)
 	}
 
 	const loading = () => {
@@ -52,13 +56,9 @@ function App() {
 	}
 
 	useEffect(() => {
-		setIsLoading(true)
 		postings()
 		photos()
-		setIsLoading(false)
 	}, [refresh, selectedPost])
-
-	console.log({ allPhotos })
 
 	return (
 		<div className="App">
