@@ -74,9 +74,9 @@ const Buy = ({ allPostings, allPhotos, setSelectedPost, user, isLoading, loading
 				</div>
 			</section>
 
-			<div class="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 p-2">
-				{isLoading === true ? loading() : postPreview}
-			</div>
+			
+				{isLoading === true ? loading() : <div class="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 p-2">{postPreview}</div>}
+			
 
 		</section>
 	)
